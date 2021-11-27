@@ -12,7 +12,7 @@
     <groupId>com.xproject.master</groupId>
     <artifactId>app</artifactId>
     <version>0.0.1</version>
-    <name>domain</name>
+    <name>app</name>
     <packaging>jar</packaging>
     <description>X Project</description>
 
@@ -27,7 +27,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>2.19.1</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
