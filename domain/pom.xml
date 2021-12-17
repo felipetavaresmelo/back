@@ -11,10 +11,10 @@
 
     <groupId>com.xproject.master</groupId>
     <artifactId>domain</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.1-SNAPSHOT</version>
     <name>domain</name>
+    <description>Domínio da aplicação</description>
     <packaging>jar</packaging>
-    <description>X Project</description>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -28,11 +28,15 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
-        <dependency>
-            <groupId>javax.inject</groupId>
-            <artifactId>javax.inject</artifactId>
-            <version>1</version>
-        </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
