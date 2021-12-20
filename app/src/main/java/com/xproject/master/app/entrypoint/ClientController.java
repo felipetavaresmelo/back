@@ -1,17 +1,21 @@
 package com.xproject.master.app.entrypoint;
 
-import com.xproject.master.domain.usecase.user.GetClientUseCaseImpl;
-import lombok.AllArgsConstructor;
+import com.xproject.master.domain.usecase.client.GetClientUseCaseImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@AllArgsConstructor
 public class ClientController {
 
-    public GetClientUseCaseImpl useCase;
+    @Autowired
+    private final GetClientUseCaseImpl useCase;
+
+    public ClientController(final GetClientUseCaseImpl useCase) {
+        this.useCase = useCase;
+    }
 
     @GetMapping("/user/{id}")
     public ResponseEntity<String> getUserById(@PathVariable String id) {
