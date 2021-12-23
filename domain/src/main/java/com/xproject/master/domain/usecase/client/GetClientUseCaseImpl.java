@@ -1,17 +1,16 @@
 package com.xproject.master.domain.usecase.client;
 
+import com.xproject.master.domain.dataprovider.ClientDataProvider;
 import com.xproject.master.domain.entity.client.Client;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class GetClientUseCaseImpl {
+public class GetClientUseCaseImpl implements GetClientUseCase {
 
-    public Client execute (String id) {
+    private final ClientDataProvider clientDataProvider;
 
-        return (Client.builder()
-                .clientId(id)
-                .name("nome do cliente")
-                .build()
-        );
+    @Override
+    public Client execute(String id) {
+        return (clientDataProvider.getClientById(id));
     }
 }
