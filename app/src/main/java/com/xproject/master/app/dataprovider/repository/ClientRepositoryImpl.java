@@ -14,4 +14,12 @@ public class ClientRepositoryImpl implements ClientDataProvider {
                 .name("Nome do cliente " + id)
                 .build();
     }
+
+    @Override
+    public Client postClient(Client client) {
+        return Client.builder()
+                .clientId(client.getClientId())
+                .name(client.getName())
+                .build();
+    }
 }

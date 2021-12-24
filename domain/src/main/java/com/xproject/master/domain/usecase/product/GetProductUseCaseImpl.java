@@ -16,7 +16,7 @@ public class GetProductUseCaseImpl implements GetProductUseCase {
     private final ProductDataProvider productDataProvider;
 
     @Override
-    public Product execute(String id) {
+    public Product getProductById(String id) {
         return (productDataProvider.getProductById(id)
         );
     }

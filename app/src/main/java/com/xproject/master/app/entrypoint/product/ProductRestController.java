@@ -1,4 +1,4 @@
-package com.xproject.master.app.entrypoint;
+package com.xproject.master.app.entrypoint.product;
 
 import com.xproject.master.domain.usecase.product.GetProductUseCase;
 import lombok.RequiredArgsConstructor;
@@ -13,18 +13,18 @@ import javax.inject.Inject;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/product")
+@RequestMapping(value = "product")
 public class ProductRestController implements ProductController {
 
     @Inject
     final GetProductUseCase useCase;
 
     @Override
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> geProductById(@PathVariable String id) {
         String response;
         try {
-            response = useCase.execute(id).getName();
+            response = useCase.getProductById(id).getName();
 
         } catch (Exception e ) {
             return ResponseEntity.internalServerError().body(e.getCause().toString());

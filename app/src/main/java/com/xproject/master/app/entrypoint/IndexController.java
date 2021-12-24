@@ -14,6 +14,6 @@ public class IndexController {
 
     @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> index(){
-        return ResponseEntity.ok("index");
+        return ResponseEntity.ok("{\"page\" : \"index\" }");
     }
 }
