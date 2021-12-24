@@ -1,21 +1,30 @@
 package com.xproject.master.app.entrypoint;
 
 import com.xproject.master.domain.usecase.product.GetProductUseCase;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.inject.Inject;
+
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
+@RequestMapping(value = "/product")
 public class ProductRestController implements ProductController {
 
-    private final GetProductUseCase useCase;
+    @Inject
+    final GetProductUseCase useCase;
 
     @Override
-    public ResponseEntity<String> geProductById(String id) {
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> geProductById(@PathVariable String id) {
         String response;
         try {
-            response = useCase.execute(id).toString();
+            response = useCase.execute(id).getName();
 
         } catch (Exception e ) {
             return ResponseEntity.internalServerError().body(e.getCause().toString());
