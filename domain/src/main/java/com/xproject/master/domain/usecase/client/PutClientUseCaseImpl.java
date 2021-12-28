@@ -9,13 +9,13 @@ import javax.inject.Named;
 
 @Named
 @AllArgsConstructor
-public class PostClientUseCaseImpl implements PostClientUseCase {
+public class PutClientUseCaseImpl implements PutClientUseCase {
 
     @Inject
     private final ClientDataProvider clientDataProvider;
 
     @Override
-    public Client postClient(Client client) {
-        return clientDataProvider.postClient(client) ? client : new Client();
+    public void putClient(Client client) {
+        clientDataProvider.putClient(client);
     }
 }

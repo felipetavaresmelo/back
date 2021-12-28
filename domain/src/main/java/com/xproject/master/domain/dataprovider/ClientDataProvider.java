@@ -4,5 +4,6 @@ import com.xproject.master.domain.entity.client.Client;
 
 public interface ClientDataProvider {
     Client getClientById(String id);
-    Client postClient(Client client);
+    Boolean postClient(Client client);
+    void putClient(Client client);
 }

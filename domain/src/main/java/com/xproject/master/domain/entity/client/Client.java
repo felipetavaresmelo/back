@@ -16,4 +16,14 @@ public class Client {
     private String name;
     private String phone;
     private PhoneTypeEnum phoneType;
+
+    public Boolean isEqual(Client client){
+        return this.clientId.equals(client.getClientId());
+    }
+
+    public void update (Client client) {
+        this.name = client.getName();
+        this.phone = client.getPhone();
+        this.phoneType = client.phoneType;
+    }
 }

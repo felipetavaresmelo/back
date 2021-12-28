@@ -3,23 +3,43 @@ package com.xproject.master.app.dataprovider.repository;
 import com.xproject.master.domain.dataprovider.ClientDataProvider;
 import com.xproject.master.domain.entity.client.Client;
 
+import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Named
 public class ClientRepositoryImpl implements ClientDataProvider {
-    @Override
-    public Client getClientById(String id) {
-        return Client.builder()
-                .clientId(id)
-                .name("Nome do cliente " + id)
-                .build();
+
+    List<Client> clientList;
+
+    @Inject
+    public ClientRepositoryImpl() {
+        this.clientList = new ArrayList<>();
+        this.clientList.add(Client.builder().clientId("1").name("Nome do cliente 1").build());
+        this.clientList.add(Client.builder().clientId("2").name("Nome do cliente 2").build());
+        this.clientList.add(Client.builder().clientId("3").name("Nome do cliente 3").build());
+
     }
 
     @Override
-    public Client postClient(Client client) {
-        return Client.builder()
-                .clientId(client.getClientId())
-                .name(client.getName())
-                .build();
+    public Boolean postClient(Client client) {
+        return clientList.add(client);
     }
+
+    @Override
+    public Client getClientById(String id) {
+        return clientList.stream()
+                .filter(client -> client.getClientId().equals(id)).findFirst()
+                .orElse(new Client());
+    }
+
+    @Override
+    public void putClient(Client client) {
+        clientList = clientList.stream()
+                .map(c -> c.isEqual(client) ? client : c).collect(Collectors.toList());
+    }
+
+
 }
