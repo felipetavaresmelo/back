@@ -23,11 +23,21 @@ public class ClientRepositoryImpl implements ClientDataProvider {
 
     }
 
+    /**
+     * Incluir um novo cliente.
+     * @param client
+     * @return boolean
+     */
     @Override
     public Boolean postClient(Client client) {
         return clientList.add(client);
     }
 
+    /**
+     * Consultar os dados do cliente pelo id.
+     * @param id do cliente
+     * @return Objeto Client
+     */
     @Override
     public Client getClientById(String id) {
         return clientList.stream()
@@ -35,11 +45,32 @@ public class ClientRepositoryImpl implements ClientDataProvider {
                 .orElse(new Client());
     }
 
+    /**
+     * Alterar todos os dados cliente.
+     * @param client
+     */
     @Override
     public void putClient(Client client) {
         clientList = clientList.stream()
                 .map(c -> c.isEqual(client) ? client : c).collect(Collectors.toList());
     }
 
+    /**
+     * Alterar apenas alguns dados do cliente.
+     * @param client
+     */
+    @Override
+    public void patchClient(Client client) {
 
+    }
+
+    /**
+     * Remover um cliente.
+     * @param client
+     * @return Boolean
+     */
+    @Override
+    public Boolean deleteClient(Client client) {
+        return null;
+    }
 }

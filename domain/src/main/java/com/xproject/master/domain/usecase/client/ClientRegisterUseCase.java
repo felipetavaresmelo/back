@@ -1,10 +1,11 @@
-package com.xproject.master.domain.dataprovider;
+package com.xproject.master.domain.usecase.client;
 
 import com.xproject.master.domain.entity.client.Client;
 
-public interface ClientDataProvider {
+public interface ClientRegisterUseCase {
+
     Client getClientById(String id);
-    Boolean postClient(Client client);
+    Client postClient(Client client);
     void putClient(Client client);
     void patchClient(Client client);
     Boolean deleteClient(Client client);

@@ -2,12 +2,8 @@ package com.xproject.master.app.entrypoint.client;
 
 import com.google.gson.Gson;
 import com.xproject.master.domain.entity.client.Client;
-import com.xproject.master.domain.entity.product.Product;
-import com.xproject.master.domain.usecase.client.GetClientUseCase;
-import com.xproject.master.domain.usecase.client.PostClientUseCase;
-import com.xproject.master.domain.usecase.client.PutClientUseCase;
+import com.xproject.master.domain.usecase.client.ClientRegisterUseCase;
 import lombok.RequiredArgsConstructor;
-import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -21,25 +17,20 @@ import javax.inject.Inject;
 public class ClientRestController implements ClientController {
 
     @Inject
-    final GetClientUseCase getClientUseCase;
-
-    @Inject
-    final PostClientUseCase postClientUseCase;
-
-    @Inject
-    final PutClientUseCase putClientUseCase;
+    final ClientRegisterUseCase useCase;
 
     @Override
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> postClient(@RequestBody Client client) {
-        String status;
+        Gson gson = new Gson();
+        Client  response;
         try {
-            status = postClientUseCase.postClient(client).getName();
+            response = useCase.postClient(client);
 
         } catch (Exception e ) {
             return ResponseEntity.internalServerError().body(e.getCause().toString());
         }
-        return ResponseEntity.ok(status);
+        return ResponseEntity.ok(gson.toJson(response));
     }
 
     @Override
@@ -48,7 +39,7 @@ public class ClientRestController implements ClientController {
         Gson gson = new Gson();
         String response;
         try {
-            response = gson.toJson(getClientUseCase.getClientById(id));
+            response = gson.toJson(useCase.getClientById(id));
             if (response == null) {
                 throw new Exception("Não encontrado.");
             }
@@ -61,10 +52,20 @@ public class ClientRestController implements ClientController {
     @Override
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<HttpStatus> putClient(@RequestBody Client client) {
-
         try {
-            putClientUseCase.putClient(client);
+            useCase.putClient(client);
 
+        } catch (Exception e ) {
+            return ResponseEntity.internalServerError().body(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @Override
+    @PatchMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<HttpStatus> patchClient(@RequestBody Client client) {
+        try {
+            useCase.patchClient(client);
         } catch (Exception e ) {
             return ResponseEntity.internalServerError().body(HttpStatus.INTERNAL_SERVER_ERROR);
         }

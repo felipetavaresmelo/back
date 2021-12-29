@@ -10,4 +10,5 @@ public interface ClientController {
     ResponseEntity<String> postClient(@RequestBody Client client);
     ResponseEntity<String> getClientById(@PathVariable String id);
     ResponseEntity<HttpStatus> putClient(@RequestBody Client client);
+    ResponseEntity<HttpStatus> patchClient(@RequestBody Client client);
 }
