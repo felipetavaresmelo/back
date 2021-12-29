@@ -14,4 +14,24 @@ public class ProductRepositoryImpl implements ProductDataProvider {
                 .name("Nome do produto " + id)
                 .build();
     }
+
+    @Override
+    public Boolean postProduct(Product client) {
+        return null;
+    }
+
+    @Override
+    public void putProduct(Product client) {
+
+    }
+
+    @Override
+    public void patchProduct(Product client) {
+
+    }
+
+    @Override
+    public Boolean deleteProduct(Product client) {
+        return null;
+    }
 }

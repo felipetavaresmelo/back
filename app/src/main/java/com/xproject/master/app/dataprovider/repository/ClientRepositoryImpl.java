@@ -25,6 +25,7 @@ public class ClientRepositoryImpl implements ClientDataProvider {
 
     /**
      * Incluir um novo cliente.
+     *
      * @param client
      * @return boolean
      */
@@ -35,6 +36,7 @@ public class ClientRepositoryImpl implements ClientDataProvider {
 
     /**
      * Consultar os dados do cliente pelo id.
+     *
      * @param id do cliente
      * @return Objeto Client
      */
@@ -47,6 +49,7 @@ public class ClientRepositoryImpl implements ClientDataProvider {
 
     /**
      * Alterar todos os dados cliente.
+     *
      * @param client
      */
     @Override
@@ -57,6 +60,7 @@ public class ClientRepositoryImpl implements ClientDataProvider {
 
     /**
      * Alterar apenas alguns dados do cliente.
+     *
      * @param client
      */
     @Override
@@ -66,6 +70,7 @@ public class ClientRepositoryImpl implements ClientDataProvider {
 
     /**
      * Remover um cliente.
+     *
      * @param client
      * @return Boolean
      */

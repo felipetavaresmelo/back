@@ -23,11 +23,11 @@ public class ClientRestController implements ClientController {
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> postClient(@RequestBody Client client) {
         Gson gson = new Gson();
-        Client  response;
+        Client response;
         try {
             response = useCase.postClient(client);
 
-        } catch (Exception e ) {
+        } catch (Exception e) {
             return ResponseEntity.internalServerError().body(e.getCause().toString());
         }
         return ResponseEntity.ok(gson.toJson(response));
@@ -43,7 +43,7 @@ public class ClientRestController implements ClientController {
             if (response == null) {
                 throw new Exception("Não encontrado.");
             }
-        } catch (Exception e ) {
+        } catch (Exception e) {
             return ResponseEntity.internalServerError().body(e.getCause().toString());
         }
         return ResponseEntity.ok(response);
@@ -55,7 +55,7 @@ public class ClientRestController implements ClientController {
         try {
             useCase.putClient(client);
 
-        } catch (Exception e ) {
+        } catch (Exception e) {
             return ResponseEntity.internalServerError().body(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return ResponseEntity.ok(HttpStatus.OK);
@@ -66,7 +66,7 @@ public class ClientRestController implements ClientController {
     public ResponseEntity<HttpStatus> patchClient(@RequestBody Client client) {
         try {
             useCase.patchClient(client);
-        } catch (Exception e ) {
+        } catch (Exception e) {
             return ResponseEntity.internalServerError().body(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return ResponseEntity.ok(HttpStatus.OK);

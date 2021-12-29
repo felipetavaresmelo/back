@@ -6,8 +6,8 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum PhoneTypeEnum {
-    COMMERCIAL ("COMMERCIAL"),
-    PERSONAL ("PERSONAL");
+    COMMERCIAL("COMMERCIAL"),
+    PERSONAL("PERSONAL");
 
     private final String value;
 }

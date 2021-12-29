@@ -6,8 +6,8 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum ProductCategoryEnum {
-    TECNOLOGY ("TECNOLOGY"),
-    BOOKS ("BOOKS");
+    TECNOLOGY("TECNOLOGY"),
+    BOOKS("BOOKS");
 
     private final String value;
 }

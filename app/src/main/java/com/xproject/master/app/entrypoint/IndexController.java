@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class IndexController {
 
     @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> index(){
+    public ResponseEntity<String> index() {
         return ResponseEntity.ok("{\"page\" : \"index\" }");
     }
 }
