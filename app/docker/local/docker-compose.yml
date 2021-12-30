@@ -4,6 +4,7 @@ services:
 
     postgres:
         image: postgres
+        container_name: postgres_dev
         restart: always
         environment:
             POSTGRES_PASSWORD: postgres
@@ -11,9 +12,10 @@ services:
 
     adminer:
         image: adminer
+        container_name: adminer_dev
         restart: always
         ports:
-            - 8080:8082
+            - "8080:8082"
 
     mongo:
         image: mongo:4.4.4
@@ -41,6 +43,7 @@ services:
 
     redis:
         image: redis
+        container_name: redis_dev
         command: redis-server --requirepass 12345678
         ports:
             - "6379:6379"
