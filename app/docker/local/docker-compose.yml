@@ -3,35 +3,43 @@ version: '3'
 services:
 
     postgres:
+        container_name: postgres
         image: postgres
-        container_name: postgres_dev
         restart: always
+        ports:
+            - "15432:5432"
+        volumes:
+            - dbdata:/data/pgdb
         environment:
             POSTGRES_PASSWORD: postgres
             POSTGRES_USER: postgres
 
-    adminer:
-        image: adminer
-        container_name: adminer_dev
+    pgadmin:
+        container_name: pgadmin4_container
+        image: dpage/pgadmin4
         restart: always
+        environment:
+            PGADMIN_DEFAULT_EMAIL: admin@admin.com
+            PGADMIN_DEFAULT_PASSWORD: root
         ports:
-            - "8080:8082"
+            - "5050:80"
 
     mongo:
+        container_name: mongo
         image: mongo:4.4.4
-        container_name: mongo_dev
         restart: always
         ports:
             - 27017:27017
         volumes:
-            - dbdata:/data/db
-            - dbdata:/docker-entrypoint-initdb.d
+            - dbdata:/data/mongodb
+#            - dbdata:/docker-entrypoint-initdb.d
         environment:
             MONGO_INITDB_DATABASE: masterdb
 
     mongo-express:
-        image: mongo-express
         container_name: mongo-express
+        image: mongo-express
+        restart: always
         depends_on:
             - mongo
         ports:
@@ -42,11 +50,23 @@ services:
             - ME_CONFIG_MONGODB_SERVER=mongo_dev
 
     redis:
+        container_name: redis
         image: redis
-        container_name: redis_dev
-        command: redis-server --requirepass 12345678
+        hostname: redis
+        restart: always
+        command: redis-server
         ports:
             - "6379:6379"
+
+    redis-commander:
+        container_name: redis-commander
+        image: rediscommander/redis-commander:latest
+        hostname: redis-commander
+        restart: always
+        environment:
+            - REDIS_HOSTS=local:redis:6379
+        ports:
+            - "8081:8081"
 
 volumes:
     dbdata:
