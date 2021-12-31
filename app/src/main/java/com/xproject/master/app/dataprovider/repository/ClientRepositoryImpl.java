@@ -55,7 +55,7 @@ public class ClientRepositoryImpl implements ClientDataProvider {
     @Override
     public void putClient(Client client) {
         clientList = clientList.stream()
-                .map(c -> c.isEqual(client) ? client : c).collect(Collectors.toList());
+                .map(c -> Boolean.TRUE.equals(c.isEqual(client)) ? client : c).collect(Collectors.toList());
     }
 
     /**
@@ -65,7 +65,8 @@ public class ClientRepositoryImpl implements ClientDataProvider {
      */
     @Override
     public void patchClient(Client client) {
-
+        clientList = clientList.stream()
+                .map(c -> Boolean.TRUE.equals(c.isEqual(client)) ? client : c).collect(Collectors.toList());
     }
 
     /**
@@ -76,6 +77,6 @@ public class ClientRepositoryImpl implements ClientDataProvider {
      */
     @Override
     public Boolean deleteClient(Client client) {
-        return null;
+        return clientList.remove(client);
     }
 }

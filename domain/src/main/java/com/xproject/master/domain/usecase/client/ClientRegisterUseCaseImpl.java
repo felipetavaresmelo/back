@@ -21,7 +21,7 @@ public class ClientRegisterUseCaseImpl implements ClientRegisterUseCase {
 
     @Override
     public Client postClient(Client client) {
-        return clientDataProvider.postClient(client) ? client : new Client();
+        return Boolean.TRUE.equals(clientDataProvider.postClient(client)) ? client : new Client();
     }
 
     @Override
