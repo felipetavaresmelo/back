@@ -29,7 +29,7 @@ public class ClientRestController implements ClientController {
             response = useCase.postClient(client);
 
         } catch (Exception e) {
-            return ResponseEntity.internalServerError().body(e.getCause().toString());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getCause().toString());
         }
         return ResponseEntity.ok(gson.toJson(response));
     }
@@ -44,9 +44,9 @@ public class ClientRestController implements ClientController {
                 throw new BaseException("Não encontrado.");
             }
         } catch (Exception e) {
-            return ResponseEntity.internalServerError().body(clientById);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(clientById);
         }
-        return ResponseEntity.ok(clientById);
+        return ResponseEntity.status(HttpStatus.OK).body(clientById);
     }
 
     @Override
@@ -54,11 +54,10 @@ public class ClientRestController implements ClientController {
     public ResponseEntity<HttpStatus> putClient(@RequestBody Client client) {
         try {
             useCase.putClient(client);
-
         } catch (Exception e) {
-            return ResponseEntity.internalServerError().body(HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return ResponseEntity.ok(HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).body(HttpStatus.OK);
     }
 
     @Override
@@ -67,7 +66,7 @@ public class ClientRestController implements ClientController {
         try {
             useCase.patchClient(client);
         } catch (Exception e) {
-            return ResponseEntity.internalServerError().body(HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return ResponseEntity.ok(HttpStatus.OK);
     }
