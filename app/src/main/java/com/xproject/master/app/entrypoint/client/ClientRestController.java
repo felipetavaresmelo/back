@@ -1,6 +1,7 @@
 package com.xproject.master.app.entrypoint.client;
 
 import com.google.gson.Gson;
+import com.xproject.master.app.exception.BaseException;
 import com.xproject.master.domain.entity.client.Client;
 import com.xproject.master.domain.usecase.client.ClientRegisterUseCase;
 import lombok.RequiredArgsConstructor;
@@ -35,18 +36,17 @@ public class ClientRestController implements ClientController {
 
     @Override
     @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> getClientById(@PathVariable String id) {
-        Gson gson = new Gson();
-        String response;
+    public ResponseEntity<Client> getClientById(@PathVariable String id) {
+        Client clientById = null;
         try {
-            response = gson.toJson(useCase.getClientById(id));
-            if (response == null) {
-                throw new Exception("Não encontrado.");
+            clientById = useCase.getClientById(id);
+            if (clientById == null) {
+                throw new BaseException("Não encontrado.");
             }
         } catch (Exception e) {
-            return ResponseEntity.internalServerError().body(e.getCause().toString());
+            return ResponseEntity.internalServerError().body(clientById);
         }
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(clientById);
     }
 
     @Override
