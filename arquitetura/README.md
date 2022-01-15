@@ -4,11 +4,11 @@
 
 ## Modelo prático
 
-Modelo utilido no projeto:
+Modelo de design utilizado no projeto:
 
 ![Clean Architecture!](/arquitetura/Arquitetura_modelo.png "Modelo clean architecture utilizado")
 
-Implementação prática das classes:
+Modelo de implementação prática das classes:
 
 ![Relacionamento entre classes!](/arquitetura/Classes_modelo.png "Modelo de relacionamento entre classes")
 
