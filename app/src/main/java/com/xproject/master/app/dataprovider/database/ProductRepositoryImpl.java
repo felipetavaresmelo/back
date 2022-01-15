@@ -1,4 +1,4 @@
-package com.xproject.master.app.dataprovider.repository;
+package com.xproject.master.app.dataprovider.database;
 
 import com.xproject.master.domain.dataprovider.ProductDataProvider;
 import com.xproject.master.domain.entity.product.Product;

@@ -12,13 +12,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Client {
 
-    private String clientId;
+    private Long id;
     private String name;
+    private String surname;
     private String phone;
+    private int age;
     private PhoneTypeEnum phoneType;
 
     public Boolean isEqual(Client client) {
-        return this.clientId.equals(client.getClientId());
+        return this.id.equals(client.getId());
     }
 
     public void update(Client client) {

@@ -2,26 +2,28 @@ package com.xproject.master.domain.usecase.client;
 
 import com.xproject.master.domain.dataprovider.ClientDataProvider;
 import com.xproject.master.domain.entity.client.Client;
-import lombok.AllArgsConstructor;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named
-@AllArgsConstructor
 public class ClientRegisterUseCaseImpl implements ClientRegisterUseCase {
 
-    @Inject
-    private final ClientDataProvider clientDataProvider;
+    private ClientDataProvider clientDataProvider;
 
-    @Override
-    public Client getClientById(String id) {
-        return (clientDataProvider.getClientById(id));
+    @Inject
+    public ClientRegisterUseCaseImpl(ClientDataProvider clientDataProvider) {
+        this.clientDataProvider = clientDataProvider;
     }
 
     @Override
-    public Client postClient(Client client) {
-        return Boolean.TRUE.equals(clientDataProvider.postClient(client)) ? client : new Client();
+    public Client addClient(Client client) {
+        return clientDataProvider.addClient(client);
+    }
+
+    @Override
+    public Client getClientById(Long id) {
+        return (clientDataProvider.getClientById(id));
     }
 
     @Override

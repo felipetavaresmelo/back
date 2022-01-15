@@ -7,7 +7,7 @@ services:
         image: postgres
         restart: always
         ports:
-            - "15432:5432"
+            - "5432:5432"
         volumes:
             - dbdata:/data/pgdb
         environment:
@@ -15,7 +15,7 @@ services:
             POSTGRES_USER: postgres
 
     pgadmin:
-        container_name: pgadmin4_container
+        container_name: pgadmin
         image: dpage/pgadmin4
         restart: always
         environment:

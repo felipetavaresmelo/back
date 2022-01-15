@@ -1,6 +1,5 @@
 package com.xproject.master.app.entrypoint.client;
 
-import com.google.gson.Gson;
 import com.xproject.master.app.exception.BaseException;
 import com.xproject.master.domain.entity.client.Client;
 import com.xproject.master.domain.usecase.client.ClientRegisterUseCase;
@@ -17,26 +16,34 @@ import javax.inject.Inject;
 @RequestMapping(value = "client")
 public class ClientRestController implements ClientController {
 
+    private ClientRegisterUseCase useCase;
+
     @Inject
-    final ClientRegisterUseCase useCase;
+    public ClientRestController(ClientRegisterUseCase useCase) {
+        this.useCase = useCase;
+    }
 
     @Override
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> postClient(@RequestBody Client client) {
-        Gson gson = new Gson();
-        Client response;
+    public ResponseEntity<Client> addClient(@RequestBody Client client) {
+        Client response = null;
         try {
-            response = useCase.postClient(client);
+            response = useCase.addClient(client);
 
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getCause().toString());
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .header("Error", e.getCause().toString())
+                    .body(response);
         }
-        return ResponseEntity.ok(gson.toJson(response));
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(response);
     }
 
     @Override
     @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Client> getClientById(@PathVariable String id) {
+    public ResponseEntity<Client> getClientById(@PathVariable Long id) {
         Client clientById = null;
         try {
             clientById = useCase.getClientById(id);

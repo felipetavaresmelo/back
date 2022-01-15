@@ -1,6 +1,5 @@
 package com.xproject.master.domain.entity.product;
 
-import com.xproject.master.domain.entity.client.Client;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

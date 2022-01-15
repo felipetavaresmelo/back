@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 public interface ClientController {
-    ResponseEntity<String> postClient(@RequestBody Client client);
+    ResponseEntity<Client> addClient(@RequestBody Client client);
 
-    ResponseEntity<Client> getClientById(@PathVariable String id);
+    ResponseEntity<Client> getClientById(@PathVariable Long id);
 
     ResponseEntity<HttpStatus> putClient(@RequestBody Client client);
 

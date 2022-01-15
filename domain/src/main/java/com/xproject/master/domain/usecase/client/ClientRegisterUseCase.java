@@ -4,9 +4,9 @@ import com.xproject.master.domain.entity.client.Client;
 
 public interface ClientRegisterUseCase {
 
-    Client getClientById(String id);
+    Client addClient(Client client);
 
-    Client postClient(Client client);
+    Client getClientById(Long id);
 
     void putClient(Client client);
 

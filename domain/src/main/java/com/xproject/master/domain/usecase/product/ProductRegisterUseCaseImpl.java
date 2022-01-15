@@ -2,17 +2,19 @@ package com.xproject.master.domain.usecase.product;
 
 import com.xproject.master.domain.dataprovider.ProductDataProvider;
 import com.xproject.master.domain.entity.product.Product;
-import lombok.AllArgsConstructor;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named
-@AllArgsConstructor
 public class ProductRegisterUseCaseImpl implements ProductRegisterUseCase {
 
+    private ProductDataProvider productDataProvider;
+
     @Inject
-    private final ProductDataProvider productDataProvider;
+    public ProductRegisterUseCaseImpl(ProductDataProvider productDataProvider) {
+        this.productDataProvider = productDataProvider;
+    }
 
     @Override
     public Product getProductById(String id) {
