@@ -9,10 +9,10 @@ import javax.inject.Named;
 @Named
 public class ClientRegisterUseCaseImpl implements ClientRegisterUseCase {
 
-    private ClientDataProvider clientDataProvider;
+    private final ClientDataProvider clientDataProvider;
 
     @Inject
-    public ClientRegisterUseCaseImpl(ClientDataProvider clientDataProvider) {
+    public ClientRegisterUseCaseImpl(@Named("clientDataProvider") ClientDataProvider clientDataProvider) {
         this.clientDataProvider = clientDataProvider;
     }
 
