@@ -1,8 +1,8 @@
-package com.xproject.master.domain.usecase.client;
+package com.xproject.master.domain.usecase.register.client;
 
 import com.xproject.master.domain.entity.client.Client;
 
-public interface ClientRegisterUseCase {
+public interface RegisterClientUseCase {
 
     Client addClient(Client client);
 

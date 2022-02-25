@@ -1,9 +1,10 @@
 package com.xproject.master.app.entrypoint.client;
 
+import com.xproject.master.app.adapter.ClientAdapter;
+import com.xproject.master.app.dto.ClientDTO;
 import com.xproject.master.app.exception.BaseException;
 import com.xproject.master.domain.entity.client.Client;
-import com.xproject.master.domain.usecase.client.ClientRegisterUseCase;
-import lombok.RequiredArgsConstructor;
+import com.xproject.master.domain.usecase.register.client.RegisterClientUseCase;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -12,23 +13,24 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 
 @RestController
-@RequiredArgsConstructor
-@RequestMapping(value = "client")
+//@RequiredArgsConstructor
+@RequestMapping(value = "/client")
 public class ClientRestController implements ClientController {
 
-    private ClientRegisterUseCase useCase;
-
     @Inject
-    public ClientRestController(ClientRegisterUseCase useCase) {
-        this.useCase = useCase;
-    }
+    private RegisterClientUseCase useCase;
+
+//    @Inject
+//    public ClientRestController(ClientRegisterUseCase useCase) {
+//        this.useCase = useCase;
+//    }
 
     @Override
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Client> addClient(@RequestBody Client client) {
-        Client response = null;
+    public ResponseEntity<ClientDTO> addClient(@RequestBody ClientDTO clientDto) {
+        ClientDTO response = null;
         try {
-            response = useCase.addClient(client);
+            response = ClientAdapter.convertToDTO(useCase.addClient(ClientAdapter.convert(clientDto)));
 
         } catch (Exception e) {
             return ResponseEntity
@@ -43,17 +45,17 @@ public class ClientRestController implements ClientController {
 
     @Override
     @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Client> getClientById(@PathVariable Long id) {
-        Client clientById = null;
+    public ResponseEntity<ClientDTO> getClientById(@PathVariable Long id) {
+        ClientDTO clientDTOById = null;
         try {
-            clientById = useCase.getClientById(id);
-            if (clientById == null) {
+            clientDTOById = new ClientDTO(useCase.getClientById(id));
+            if (clientDTOById == null) {
                 throw new BaseException("Não encontrado.");
             }
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(clientById);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(clientDTOById);
         }
-        return ResponseEntity.status(HttpStatus.OK).body(clientById);
+        return ResponseEntity.status(HttpStatus.OK).body(clientDTOById);
     }
 
     @Override

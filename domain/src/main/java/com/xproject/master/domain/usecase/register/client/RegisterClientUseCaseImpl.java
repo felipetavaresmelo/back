@@ -1,4 +1,4 @@
-package com.xproject.master.domain.usecase.client;
+package com.xproject.master.domain.usecase.register.client;
 
 import com.xproject.master.domain.dataprovider.ClientDataProvider;
 import com.xproject.master.domain.entity.client.Client;
@@ -7,12 +7,13 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named
-public class ClientRegisterUseCaseImpl implements ClientRegisterUseCase {
-
-    private final ClientDataProvider clientDataProvider;
+public class RegisterClientUseCaseImpl implements RegisterClientUseCase {
 
     @Inject
-    public ClientRegisterUseCaseImpl(@Named("clientDataProvider") ClientDataProvider clientDataProvider) {
+    private final ClientDataProvider clientDataProvider;
+
+//    @Inject
+    public RegisterClientUseCaseImpl(@Named("clientDataProvider") ClientDataProvider clientDataProvider) {
         this.clientDataProvider = clientDataProvider;
     }
 

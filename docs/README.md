@@ -6,11 +6,11 @@
 
 Modelo de design utilizado no projeto:
 
-![Clean Architecture!](/arquitetura/Arquitetura_modelo.png "Modelo clean architecture utilizado")
+![Clean Architecture!](/docs/Arquitetura_modelo.png "Modelo clean architecture utilizado")
 
 Modelo de implementação prática das classes:
 
-![Relacionamento entre classes!](/arquitetura/Classes_modelo.png "Modelo de relacionamento entre classes")
+![Relacionamento entre classes!](/docs/Classes_modelo.png "Modelo de relacionamento entre classes")
 
 ## Referências
 

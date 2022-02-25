@@ -1,4 +1,4 @@
-package com.xproject.master.app.dataprovider.database.repository.model;
+package com.xproject.master.app.dataprovider.repository.persistent;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,10 +14,10 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "TB_CLIENT")
-public class ClientModel implements Serializable {
+public class ClientPO implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private Long id;
 
@@ -35,5 +35,4 @@ public class ClientModel implements Serializable {
 
     @Column(name="phoneType")
     private String phoneType;
-
 }

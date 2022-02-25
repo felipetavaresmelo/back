@@ -1,8 +1,8 @@
-package com.xproject.master.domain.usecase.product;
+package com.xproject.master.domain.usecase.register.product;
 
 import com.xproject.master.domain.entity.product.Product;
 
-public interface ProductRegisterUseCase {
+public interface RegisterProductUseCase {
 
     Product getProductById(String id);
 

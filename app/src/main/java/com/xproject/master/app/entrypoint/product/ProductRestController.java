@@ -1,6 +1,6 @@
 package com.xproject.master.app.entrypoint.product;
 
-import com.xproject.master.domain.usecase.product.ProductRegisterUseCase;
+import com.xproject.master.domain.usecase.register.product.RegisterProductUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +17,7 @@ import javax.inject.Inject;
 public class ProductRestController implements ProductController {
 
     @Inject
-    private final ProductRegisterUseCase useCase;
+    private final RegisterProductUseCase useCase;
 
     @Override
     @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)

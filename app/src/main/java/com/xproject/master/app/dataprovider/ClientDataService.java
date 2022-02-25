@@ -1,8 +1,8 @@
-package com.xproject.master.app.dataprovider.database;
+package com.xproject.master.app.dataprovider;
 
-import com.xproject.master.app.dataprovider.database.adapter.ClientAdapter;
-import com.xproject.master.app.dataprovider.database.repository.ClientRepository;
-import com.xproject.master.app.dataprovider.database.repository.model.ClientModel;
+import com.xproject.master.app.adapter.ClientAdapter;
+import com.xproject.master.app.dataprovider.repository.ClientRepository;
+import com.xproject.master.app.dataprovider.repository.persistent.ClientPO;
 import com.xproject.master.domain.dataprovider.ClientDataProvider;
 import com.xproject.master.domain.entity.client.Client;
 
@@ -11,23 +11,24 @@ import javax.inject.Named;
 import java.util.Optional;
 
 @Named
-public abstract class ClientDataBaseService implements ClientDataProvider {
-
-    private ClientRepository clientRepository;
+public abstract class ClientDataService implements ClientDataProvider {
 
     @Inject
-    public ClientDataBaseService(ClientRepository clientRepository) {
-        this.clientRepository = clientRepository;
+    private ClientRepository clientData;
+
+//    @Inject
+    public ClientDataService(ClientRepository clientData) {
+        this.clientData = clientData;
     }
 
     @Override
     public Client addClient(Client client) {
-        return ClientAdapter.convert(clientRepository.save(ClientAdapter.convert(client)));
+        return ClientAdapter.convert(clientData.save(ClientAdapter.convertToPO(client)));
     }
 
     @Override
     public Client getClientById(Long id) {
-        Optional<ClientModel> clientModel = clientRepository.findById(id);
+        Optional<ClientPO> clientModel = clientData.findById(id);
         if(clientModel.isPresent()){
             return ClientAdapter.convert(clientModel.get());
         }
