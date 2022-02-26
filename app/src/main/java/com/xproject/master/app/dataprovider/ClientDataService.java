@@ -5,15 +5,15 @@ import com.xproject.master.app.dataprovider.repository.ClientRepository;
 import com.xproject.master.app.dataprovider.repository.persistent.ClientPO;
 import com.xproject.master.domain.dataprovider.ClientDataProvider;
 import com.xproject.master.domain.entity.client.Client;
+import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.Optional;
 
-@Named
+@Service
 public abstract class ClientDataService implements ClientDataProvider {
 
-    @Inject
     private ClientRepository clientData;
 
 //    @Inject

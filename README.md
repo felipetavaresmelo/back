@@ -1,7 +1,6 @@
 # X Project
 
 ## Ambiente
-
 ---
 ### Docker Compose
 Executar o comando abaixo a partir da pasta *./app/docker/local/*
@@ -23,3 +22,6 @@ Ou levantar os serviços através do plugin: https://plugins.jetbrains.com/plugi
 - Abrir interface web: http://localhost:8081
 
 ---
+
+## Subir a aplicação
+
