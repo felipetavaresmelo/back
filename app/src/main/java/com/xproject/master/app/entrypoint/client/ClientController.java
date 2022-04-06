@@ -7,12 +7,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
+
 public interface ClientController {
-    ResponseEntity<ClientDTO> addClient(@RequestBody ClientDTO client);
+//    ResponseEntity<ClientDTO> addClient(@RequestBody ClientDTO client);
 
-    ResponseEntity<ClientDTO> getClientById(@PathVariable Long id);
-
-    ResponseEntity<HttpStatus> putClient(@RequestBody Client client);
-
-    ResponseEntity<HttpStatus> patchClient(@RequestBody Client client);
+    ResponseEntity<List<ClientDTO>> getClients();
+//
+//    ResponseEntity<ClientDTO> getClientById(@PathVariable Long id);
+//
+//    ResponseEntity<HttpStatus> putClient(@RequestBody Client client);
+//
+//    ResponseEntity<HttpStatus> patchClient(@RequestBody Client client);
 }

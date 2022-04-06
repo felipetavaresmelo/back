@@ -18,6 +18,25 @@ Ou levantar os serviços através do plugin: https://plugins.jetbrains.com/plugi
 - User: admin@admin.com
 - Senha: root
 
+Configurações iniciais:
+Após login no pgAdmin, seguir os passos abaixo:
+
+- Criar base de dados manualmente:
+  - Abrir o pgAdmin
+  - Abrir a aba SQL e executar o comando abaixo:
+    ```postgres-sql
+    create database xprojectdb;
+    ```
+- Abrir Servers > Create > Server
+  - General:
+    - Name: xprojectdb
+  - Connection:
+    - Host name/address: 127.0.0.1
+    - Port: 5432
+    - Maintenance database: xprojectdb
+    - Username: postgres
+    - Password: postgres
+
 #### [Redis Commander](https://www.npmjs.com/package/redis-commander)
 - Abrir interface web: http://localhost:8081
 
