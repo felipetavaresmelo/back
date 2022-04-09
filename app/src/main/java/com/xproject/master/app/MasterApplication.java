@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-//@SpringBootApplication(scanBasePackages = "com.xproject")
 @ComponentScan(basePackages = "com.xproject")
 public class MasterApplication {
 
