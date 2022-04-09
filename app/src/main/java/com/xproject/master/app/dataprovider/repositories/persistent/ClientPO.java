@@ -2,10 +2,7 @@ package com.xproject.master.app.dataprovider.repositories.persistent;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -13,7 +10,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @AllArgsConstructor
 @NoArgsConstructor
-//@Table(name = "TB_CLIENT")
+@Table(name = "TB_CLIENT")
 public class ClientPO implements Serializable {
 
     private static final long serialVersionUID = 1L;
