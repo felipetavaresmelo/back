@@ -2,18 +2,18 @@ package com.xproject.master.app.config;
 
 import com.xproject.master.app.dataprovider.repositories.ClientJpaRepository;
 import com.xproject.master.app.dataprovider.repositories.persistent.ClientPO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-import javax.inject.Inject;
 import java.util.Arrays;
 
 @Configuration
 @Profile("test")
 public class TestConfig implements CommandLineRunner {
 
-    @Inject
+    @Autowired
     private ClientJpaRepository clientJpaRepository;
 
     @Override

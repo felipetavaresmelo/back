@@ -1,18 +1,19 @@
-package com.xproject.master.domain.usecase.register.client;
+package com.xproject.master.domain.usecase.client;
 
 import com.xproject.master.domain.dataprovider.ClientDataProvider;
 import com.xproject.master.domain.entity.client.Client;
-import lombok.RequiredArgsConstructor;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
 
 @Named
-@RequiredArgsConstructor
-public class GetClientsUseCase {
+public class GetClientsUseCaseImpl implements GetClientsUseCase {
 
+    @Inject
     private ClientDataProvider clientDataProvider;
 
+    @Override
     public List<Client> getClients() {
         return clientDataProvider.getClients();
     }

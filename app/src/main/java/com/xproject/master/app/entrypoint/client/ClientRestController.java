@@ -1,8 +1,10 @@
 package com.xproject.master.app.entrypoint.client;
 
 import com.xproject.master.app.dto.ClientDTO;
-import com.xproject.master.app.dto.adapter.ClientDTOAdapter;
-import com.xproject.master.domain.usecase.register.client.GetClientsUseCase;
+import com.xproject.master.app.dto.mappers.ClientDTOMapper;
+import com.xproject.master.domain.entity.client.Client;
+import com.xproject.master.domain.usecase.client.GetClientsUseCase;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,18 +17,17 @@ import java.util.List;
 @RequestMapping(value = "client")
 public class ClientRestController implements ClientController {
 
-    private final GetClientsUseCase useCase;
-
-    public ClientRestController(final GetClientsUseCase useCase) {
-        this.useCase = useCase;
-    }
+    @Autowired
+    private GetClientsUseCase useCase;
 
     @Override
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ClientDTO>> getClients() {
+        List<Client> clientList;
         List<ClientDTO> clientDTOList = null;
         try {
-            clientDTOList = ClientDTOAdapter.convertClientList(useCase.getClients());
+            clientList = useCase.getClients();
+            clientDTOList = ClientDTOMapper.INSTANCE.map(clientList);
             if (clientDTOList.isEmpty()) {
                 return ResponseEntity.notFound().build();
             }
