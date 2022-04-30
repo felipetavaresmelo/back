@@ -2,12 +2,11 @@ package com.xproject.master.domain.entity.client;
 
 import lombok.*;
 
-@Getter
-@Setter
+//@Data
+@Data
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@NoArgsConstructor
-public final class Client {
+public class Client {
 
     private Long id;
     private String name;

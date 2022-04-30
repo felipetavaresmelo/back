@@ -7,12 +7,12 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface ClientDTOMapper {
 
     ClientDTOMapper INSTANCE = Mappers.getMapper(ClientDTOMapper.class);
 
-    ClientDTO ofClient(Client client);
+    ClientDTO toClientDTO(Client client);
 
     List<ClientDTO> map (List<Client> clientList);
 }

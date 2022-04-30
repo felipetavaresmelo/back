@@ -1,16 +1,15 @@
 package com.xproject.master.app.dataprovider.repositories.persistent;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Data
+@Builder
 @NoArgsConstructor
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Table(name = "TB_CLIENT")
 public class ClientPO implements Serializable {
 
@@ -18,7 +17,14 @@ public class ClientPO implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
     private Long id;
+
+    @Basic
+    @Column
     private String name;
+
+    @Basic
+    @Column
     private String phone;
 }

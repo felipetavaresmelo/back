@@ -19,8 +19,8 @@ public class TestConfig implements CommandLineRunner {
     @Override
     public void run(String... args) {
 
-        ClientPO c1 = new ClientPO(null, "Maria Brown", "988888888");
-        ClientPO c2 = new ClientPO(null, "Alex Green", "977777777");
+        ClientPO c1 = ClientPO.builder().id(1L).name("Maria Brown").phone("988888888").build();
+        ClientPO c2 = ClientPO.builder().id(2L).name("Alex Green").phone("977777777").build();
 
         clientJpaRepository.saveAll(Arrays.asList(c1, c2));
     }
