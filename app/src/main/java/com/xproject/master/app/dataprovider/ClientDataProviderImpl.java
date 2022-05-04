@@ -1,8 +1,9 @@
 package com.xproject.master.app.dataprovider;
 
+import com.xproject.master.app.adapter.ClientMapper;
 import com.xproject.master.app.dataprovider.repositories.ClientJpaRepository;
+import com.xproject.master.app.dataprovider.repositories.adapter.ClientPOMapper;
 import com.xproject.master.app.dataprovider.repositories.persistent.ClientPO;
-import com.xproject.master.app.mappers.ClientMapper;
 import com.xproject.master.domain.dataprovider.ClientDataProvider;
 import com.xproject.master.domain.entity.client.Client;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +25,28 @@ public class ClientDataProviderImpl implements ClientDataProvider {
             return new ArrayList<>();
         }
         return ClientMapper.INSTANCE.map(clientPOList);
+    }
+    public ClientPO saveClientPO (ClientPO clientPO) {
+        return clientData.save(clientPO);
+    }
+
+    public List<ClientPO> saveClientPOList (List<ClientPO> clientPOList) {
+        return clientData.saveAll(clientPOList);
+    }
+
+    public void deleteClientPO (ClientPO clientPO) {
+        clientData.delete(clientPO);
+    }
+
+    public void deleteClientPOList (List<ClientPO> clientPOList) {
+        clientData.deleteAll(clientPOList);
+    }
+
+    public Client saveClient(Client client) {
+        return ClientMapper.INSTANCE.ofClientPO(saveClientPO(ClientPOMapper.INSTANCE.ofClient(client)));
+    }
+
+    public List<Client> saveClientList (List<Client> clientList) {
+        return ClientMapper.INSTANCE.map(saveClientPOList(ClientPOMapper.INSTANCE.map(clientList)));
     }
 }

@@ -3,8 +3,8 @@ package com.xproject.master.app.dto;
 import lombok.*;
 
 @Data
-@Builder
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor
+@AllArgsConstructor
 public class ClientDTO {
 
     private Long id;

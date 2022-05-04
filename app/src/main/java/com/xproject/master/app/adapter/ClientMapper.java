@@ -1,4 +1,4 @@
-package com.xproject.master.app.mappers;
+package com.xproject.master.app.adapter;
 
 import com.xproject.master.app.dataprovider.repositories.persistent.ClientPO;
 import com.xproject.master.app.dto.ClientDTO;

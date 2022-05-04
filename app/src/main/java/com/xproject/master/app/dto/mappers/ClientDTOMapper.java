@@ -12,7 +12,7 @@ public interface ClientDTOMapper {
 
     ClientDTOMapper INSTANCE = Mappers.getMapper(ClientDTOMapper.class);
 
-    ClientDTO toClientDTO(Client client);
+    ClientDTO ofClient(Client client);
 
     List<ClientDTO> map (List<Client> clientList);
 }
