@@ -5,16 +5,15 @@ import com.xproject.master.domain.entity.client.Client;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.List;
 
 @Named
-public class GetClientsUseCaseImpl implements GetClientsUseCase {
+public class GetClientByIdUseCaseImpl implements GetClientByIdUseCase {
 
     @Inject
     private ClientDataProvider clientDataProvider;
 
     @Override
-    public List<Client> execute() {
-        return clientDataProvider.getClients();
+    public Client execute(Long id) {
+        return clientDataProvider.getClientById(id);
     }
 }

@@ -1,4 +1,4 @@
-package com.xproject.master.app.dto.mappers;
+package com.xproject.master.app.dto.adapter;
 
 import com.xproject.master.app.dto.ClientDTO;
 import com.xproject.master.domain.entity.client.Client;
