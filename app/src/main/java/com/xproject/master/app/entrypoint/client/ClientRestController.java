@@ -9,7 +9,6 @@ import com.xproject.master.domain.usecase.client.GetClientsUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,39 +25,19 @@ public class ClientRestController implements ClientController {
     @Autowired
     private GetClientByIdUseCase getClientById;
 
+
     @Override
     @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ClientDTO>> getClients() {
-        List<Client> clientList;
-        List<ClientDTO> clientDTOList = null;
-        try {
-            clientList = getClients.execute();
-            if (clientList.isEmpty()) {
-                return ResponseEntity.notFound().build();
-            }
-            clientDTOList = ClientDTOAdapter.ofClientList(clientList);
-
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().body(clientDTOList);
-        }
+        List<Client> clientList = getClients.execute();
+        List<ClientDTO> clientDTOList = ClientDTOAdapter.ofClientList(clientList);
         return ResponseEntity.ok().body(clientDTOList);
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ClientDTO> getClientById (@PathVariable Long id) {
-        Client client;
-        ClientDTO clientDTO = null;
-        try {
-            client = getClientById.execute(id);
-            if(ObjectUtils.isEmpty(client)) {
-                return ResponseEntity.notFound().build();
-            }
-            clientDTO = ClientDTOMapper.INSTANCE.ofClient(client);
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().body(clientDTO);
-        }
-
+        Client client = getClientById.execute(id);
+        ClientDTO clientDTO = ClientDTOMapper.INSTANCE.ofClient(client);
         return ResponseEntity.ok().body(clientDTO);
-
     }
 }

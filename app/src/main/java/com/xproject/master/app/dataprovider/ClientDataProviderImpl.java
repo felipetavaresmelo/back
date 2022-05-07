@@ -4,7 +4,6 @@ import com.xproject.master.app.adapter.ClientMapper;
 import com.xproject.master.app.dataprovider.repositories.ClientJpaRepository;
 import com.xproject.master.app.dataprovider.repositories.adapter.ClientPOMapper;
 import com.xproject.master.app.dataprovider.repositories.persistent.ClientPO;
-import com.xproject.master.app.exception.ClientPONotFoundException;
 import com.xproject.master.domain.dataprovider.ClientDataProvider;
 import com.xproject.master.domain.entity.client.Client;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +20,8 @@ public class ClientDataProviderImpl implements ClientDataProvider {
 
     //CLIENTPO
 
-    public ClientPO getClientPOById (Long id) throws ClientPONotFoundException {
-        ClientPO clientPO;
-        try {
-            clientPO = clientData.getById(id);
-        } catch (Exception e) {
-            throw new ClientPONotFoundException("Client persistence object not found: " + e);
-        }
-        return clientPO;
+    public ClientPO getClientPOById (Long id) {
+        return clientData.getById(id);
     }
 
     public ClientPO saveClientPO (ClientPO clientPO) {
@@ -50,11 +43,7 @@ public class ClientDataProviderImpl implements ClientDataProvider {
     // CLIENT
 
     public Client getClientById (Long id) {
-        try {
-            return ClientMapper.INSTANCE.ofClientPO(getClientPOById(id));
-        } catch (ClientPONotFoundException e) {
-            return new Client();
-        }
+        return ClientMapper.INSTANCE.ofClientPO(getClientPOById(id));
     }
 
     public Client saveClient(Client client) {
