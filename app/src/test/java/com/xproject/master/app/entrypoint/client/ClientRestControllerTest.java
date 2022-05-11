@@ -3,69 +3,87 @@ package com.xproject.master.app.entrypoint.client;
 import com.xproject.master.app.dto.ClientDTO;
 import com.xproject.master.app.dto.adapter.ClientDTOAdapter;
 import com.xproject.master.domain.entity.client.Client;
-import com.xproject.master.domain.usecase.client.GetClientsUseCase;
+import com.xproject.master.domain.usecase.client.GetClientsUseCaseImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
+import org.junit.runner.RunWith;
+import org.mockito.*;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 class ClientRestControllerTest {
 
-    private ClientDTO clientDTO;
-    private Client client;
-    private ResponseEntity<?> responseEntity;
+    private List<ClientDTO> clientDTOList;
+    private List<Client> clientList;
+    private ResponseEntity<List<ClientDTO>> responseEntityClientDTOList;
 
-    @Mock
+    @InjectMocks
     ClientRestController clientRestController;
-
     @Mock
-    GetClientsUseCase getClientsUseCase;
+    GetClientsUseCaseImpl getClients;
 
     @BeforeEach
     void setUp() {
-        clientDTO = new ClientDTO();
-        clientDTO.setName("Maria Brown");
-        clientDTO.setPhone("988888888");
+        clientDTOList = new ArrayList<>();
 
-        client = new Client();
-        client.setName("Maria Brown");
-        client.setPhone("988888888");
+        ClientDTO clientDTO1 = new ClientDTO();
+        clientDTO1.setName("Maria");
+        clientDTO1.setPhone("111111111");
+        clientDTOList.add(clientDTO1);
+
+        ClientDTO clientDTO2 = new ClientDTO();
+        clientDTO2.setName("Brown");
+        clientDTO2.setPhone("222222222");
+        clientDTOList.add(clientDTO2);
+
+        clientList = new ArrayList<>();
+
+        Client client1 = new Client();
+        client1.setName("Maria");
+        client1.setPhone("111111111");
+        clientList.add(client1);
+
+        Client client2 = new Client();
+        client2.setName("Brown");
+        client2.setPhone("222222222");
+        clientList.add(client2);
 
         HttpHeaders header = new HttpHeaders();
-        header.setContentType(MediaType.APPLICATION_JSON);
 
-        responseEntity = new ResponseEntity<>(
-                client,
+        responseEntityClientDTOList = new ResponseEntity<>(
+                clientDTOList,
                 header,
                 HttpStatus.OK
         );
+
+        MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    @DisplayName("Quando consultar todos os clientes deve retornar ")
+    @DisplayName("Quando consultar todos os clientes deve retornar com sucesso")
     void getClients() {
 
-        when(getClientsUseCase.execute()).thenReturn(Collections.singletonList(client));
-        when(ClientDTOAdapter.ofClientList(any())).thenReturn(Collections.singletonList(clientDTO));
-        when(ResponseEntity.ok().body(any())).thenReturn(responseEntity);
-
+        when(getClients.execute()).thenReturn(clientList);
+        Mockito.mockStatic(ClientDTOAdapter.class)
+                .when(() -> ClientDTOAdapter.ofClientList(any()))
+                .thenReturn(clientDTOList);
 
         ResponseEntity<List<ClientDTO>> result = clientRestController.getClients();
 
-        assertEquals("", result);
-        Mockito.verify(mockedList).clear();
+        assertEquals(responseEntityClientDTOList, result);
+        assertEquals(clientDTOList, result.getBody());
     }
 
     @Test
