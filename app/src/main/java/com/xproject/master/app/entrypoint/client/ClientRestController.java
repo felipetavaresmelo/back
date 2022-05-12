@@ -1,7 +1,6 @@
 package com.xproject.master.app.entrypoint.client;
 
 import com.xproject.master.app.dto.ClientDTO;
-import com.xproject.master.app.dto.adapter.ClientDTOAdapter;
 import com.xproject.master.app.dto.adapter.ClientDTOMapper;
 import com.xproject.master.domain.entity.client.Client;
 import com.xproject.master.domain.usecase.client.GetClientByIdUseCase;
@@ -30,7 +29,7 @@ public class ClientRestController implements ClientController {
     @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ClientDTO>> getClients() {
         List<Client> clientList = getClients.execute();
-        List<ClientDTO> clientDTOList = ClientDTOAdapter.ofClientList(clientList);
+        List<ClientDTO> clientDTOList = ClientDTOMapper.INSTANCE.map(clientList);
         return ResponseEntity.ok().body(clientDTOList);
     }
 
