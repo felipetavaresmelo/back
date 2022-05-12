@@ -21,7 +21,7 @@ public class TestConfig implements CommandLineRunner {
     @Override
     public void run(String... args) {
 
-        List clientPOList = new ArrayList<ClientPO>();
+        List<ClientPO> clientPOList = new ArrayList<>();
 
         ClientPO clientPO1 = new ClientPO();
         clientPO1.setName("Antonio Silva");
@@ -35,7 +35,7 @@ public class TestConfig implements CommandLineRunner {
 
         clientDataProvider.saveClientPOList(clientPOList);
 
-        List clientList = new ArrayList<Client>();
+        List<Client> clientList = new ArrayList<>();
 
         Client client = new Client();
         client.setName("Maria Brown");

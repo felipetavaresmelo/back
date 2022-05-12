@@ -14,5 +14,5 @@ public interface ClientDTOMapper {
 
     ClientDTO ofClient(Client client);
 
-    List<ClientDTO> map (List<Client> clientList);
+    List<ClientDTO> ofClientList(List<Client> clientList);
 }

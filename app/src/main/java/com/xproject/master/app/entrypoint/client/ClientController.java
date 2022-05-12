@@ -6,5 +6,5 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface ClientController {
-    ResponseEntity<List<ClientDTO>> getClients();
+    ResponseEntity<List<ClientDTO>> getClientList();
 }

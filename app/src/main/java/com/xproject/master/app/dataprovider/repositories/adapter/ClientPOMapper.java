@@ -14,5 +14,5 @@ public interface ClientPOMapper {
 
     ClientPO ofClient(Client client);
 
-    List<ClientPO> map (List<Client> clientList);
+    List<ClientPO> ofClientList(List<Client> clientList);
 }

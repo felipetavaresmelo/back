@@ -5,7 +5,11 @@ import com.xproject.master.domain.entity.client.Client;
 import java.util.List;
 
 public interface ClientDataProvider {
-    List<Client> getClients();
-
     Client getClientById (Long id);
+
+    List<Client> getClientList();
+
+    Client saveClient (Client client);
+
+    List<Client> saveClientList(List<Client> clientList);
 }

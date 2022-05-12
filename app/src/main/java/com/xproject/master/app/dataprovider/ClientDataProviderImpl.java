@@ -42,24 +42,27 @@ public class ClientDataProviderImpl implements ClientDataProvider {
 
     // CLIENT
 
+    @Override
     public Client getClientById (Long id) {
         return ClientMapper.INSTANCE.ofClientPO(getClientPOById(id));
     }
 
-    public Client saveClient(Client client) {
-        return ClientMapper.INSTANCE.ofClientPO(saveClientPO(ClientPOMapper.INSTANCE.ofClient(client)));
-    }
-
-    public List<Client> saveClientList (List<Client> clientList) {
-        return ClientMapper.INSTANCE.map(saveClientPOList(ClientPOMapper.INSTANCE.map(clientList)));
-    }
-
     @Override
-    public List<Client> getClients() {
+    public List<Client> getClientList () {
         List<ClientPO> clientPOList = clientData.findAll();
         if(clientPOList.isEmpty()){
             return new ArrayList<>();
         }
-        return ClientMapper.INSTANCE.map(clientPOList);
+        return ClientMapper.INSTANCE.ofClientPOList(clientPOList);
+    }
+
+    @Override
+    public Client saveClient (Client client) {
+        return ClientMapper.INSTANCE.ofClientPO(this.saveClientPO(ClientPOMapper.INSTANCE.ofClient(client)));
+    }
+
+    @Override
+    public List<Client> saveClientList (List<Client> clientList) {
+        return ClientMapper.INSTANCE.ofClientPOList(this.saveClientPOList(ClientPOMapper.INSTANCE.ofClientList(clientList)));
     }
 }

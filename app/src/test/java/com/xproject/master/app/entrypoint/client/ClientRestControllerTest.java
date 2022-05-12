@@ -1,10 +1,9 @@
 package com.xproject.master.app.entrypoint.client;
 
 import com.xproject.master.app.dto.ClientDTO;
-import com.xproject.master.app.dto.adapter.ClientDTOMapperImpl;
 import com.xproject.master.domain.entity.client.Client;
 import com.xproject.master.domain.usecase.client.GetClientByIdUseCase;
-import com.xproject.master.domain.usecase.client.GetClientsUseCase;
+import com.xproject.master.domain.usecase.client.GetClientListUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,7 +23,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.when;
 
-
 @RunWith(MockitoJUnitRunner.class)
 class ClientRestControllerTest {
     private ClientDTO clientDTO;
@@ -35,12 +33,9 @@ class ClientRestControllerTest {
     @InjectMocks
     ClientRestController clientRestController;
     @Mock
-    GetClientsUseCase getClients;
+    GetClientListUseCase getClientList;
     @Mock
     GetClientByIdUseCase getClientById;
-    @Mock
-    ClientDTOMapperImpl clientDTOMapper;
-
 
     @BeforeEach
     void setUp() {
@@ -79,9 +74,9 @@ class ClientRestControllerTest {
                 new HttpHeaders(),
                 HttpStatus.OK
         );
-        when(getClients.execute()).thenReturn(clientList);
+        when(getClientList.execute()).thenReturn(clientList);
 
-        ResponseEntity<List<ClientDTO>> result = clientRestController.getClients();
+        ResponseEntity<List<ClientDTO>> result = clientRestController.getClientList();
 
         assertEquals(responseEntityClientDTOList, result);
         assertEquals(clientDTOList, result.getBody());
@@ -99,7 +94,7 @@ class ClientRestControllerTest {
         );
         when(getClientById.execute(any())).thenReturn(client);
 
-        ResponseEntity<ClientDTO> result = clientRestController.getClientById(any());
+        ResponseEntity<ClientDTO> result = clientRestController.getClientById(1L);
 
         assertEquals(responseEntityClientDTO, result);
         assertEquals(clientDTO, result.getBody());
