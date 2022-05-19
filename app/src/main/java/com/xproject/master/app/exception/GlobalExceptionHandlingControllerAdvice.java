@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import java.text.MessageFormat;
+import java.util.NoSuchElementException;
 
 @ControllerAdvice
 public class GlobalExceptionHandlingControllerAdvice {
@@ -22,23 +23,21 @@ public class GlobalExceptionHandlingControllerAdvice {
     }
 
 
-    @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<String> handleEntityNotFoundException(HttpServletRequest req, Exception exception) throws Exception {
+    @ExceptionHandler({EntityNotFoundException.class, NoSuchElementException.class})
+    public ResponseEntity<String> handleEntityNotFoundException(HttpServletRequest req, Exception exception) {
 
         if (AnnotationUtils.findAnnotation(exception.getClass(), ResponseStatus.class) != null)
-            throw exception;
+            return ResponseEntity.notFound().build();
 
         logger.error(MessageFormat.format("Request: {0} raised {1}", req.getRequestURI(), exception));
 
         return ResponseEntity.notFound().build();
     }
-
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<String> handleError(HttpServletRequest req, Exception exception) throws Exception {
+    public ResponseEntity<String> handleError(HttpServletRequest req, Exception exception) {
 
-        // Rethrow annotated exceptions or they will be processed here instead.
         if (AnnotationUtils.findAnnotation(exception.getClass(), ResponseStatus.class) != null)
-            throw exception;
+            return ResponseEntity.internalServerError().body(exception.toString());
 
         logger.error(MessageFormat.format("Request: {0} raised {1}", req.getRequestURI(), exception));
 

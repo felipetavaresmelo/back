@@ -2,16 +2,14 @@ package com.xproject.master.app.entrypoint.client;
 
 import com.xproject.master.app.dto.ClientDTO;
 import com.xproject.master.domain.entity.client.Client;
-import com.xproject.master.domain.usecase.client.GetClientByIdUseCase;
-import com.xproject.master.domain.usecase.client.GetClientListUseCase;
+import com.xproject.master.domain.usecase.client.FindClientByIdUseCase;
+import com.xproject.master.domain.usecase.client.FindClientAllUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +21,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
 class ClientRestControllerTest {
     private ClientDTO clientDTO;
     private List<ClientDTO> clientDTOList;
@@ -33,9 +30,9 @@ class ClientRestControllerTest {
     @InjectMocks
     ClientRestController clientRestController;
     @Mock
-    GetClientListUseCase getClientList;
+    FindClientAllUseCase getClientList;
     @Mock
-    GetClientByIdUseCase getClientById;
+    FindClientByIdUseCase getClientById;
 
     @BeforeEach
     void setUp() {
@@ -76,7 +73,7 @@ class ClientRestControllerTest {
         );
         when(getClientList.execute()).thenReturn(clientList);
 
-        ResponseEntity<List<ClientDTO>> result = clientRestController.getClientList();
+        ResponseEntity<List<ClientDTO>> result = clientRestController.findClientAll();
 
         assertEquals(responseEntityClientDTOList, result);
         assertEquals(clientDTOList, result.getBody());
@@ -94,7 +91,7 @@ class ClientRestControllerTest {
         );
         when(getClientById.execute(any())).thenReturn(client);
 
-        ResponseEntity<ClientDTO> result = clientRestController.getClientById(1L);
+        ResponseEntity<ClientDTO> result = clientRestController.findClientById(1L);
 
         assertEquals(responseEntityClientDTO, result);
         assertEquals(clientDTO, result.getBody());

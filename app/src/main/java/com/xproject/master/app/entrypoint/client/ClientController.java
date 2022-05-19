@@ -6,5 +6,9 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface ClientController {
-    ResponseEntity<List<ClientDTO>> getClientList();
+
+    ResponseEntity<ClientDTO> findClientById(Long id);
+    ResponseEntity<List<ClientDTO>> findClientAll();
+    ResponseEntity<ClientDTO> saveClient(ClientDTO clientDTO);
+    ResponseEntity<List<ClientDTO>> saveClientList(List<ClientDTO> clientDTOList);
 }

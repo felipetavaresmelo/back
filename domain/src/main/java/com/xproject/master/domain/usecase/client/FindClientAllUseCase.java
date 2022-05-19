@@ -4,6 +4,6 @@ import com.xproject.master.domain.entity.client.Client;
 
 import java.util.List;
 
-public interface GetClientListUseCase {
+public interface FindClientAllUseCase {
     List<Client> execute();
 }

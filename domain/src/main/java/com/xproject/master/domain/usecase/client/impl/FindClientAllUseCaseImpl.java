@@ -1,20 +1,21 @@
-package com.xproject.master.domain.usecase.client;
+package com.xproject.master.domain.usecase.client.impl;
 
 import com.xproject.master.domain.dataprovider.ClientDataProvider;
 import com.xproject.master.domain.entity.client.Client;
+import com.xproject.master.domain.usecase.client.FindClientAllUseCase;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
 
 @Named
-public class SaveClientListUseCaseImpl implements SaveClientListUseCase {
+public class FindClientAllUseCaseImpl implements FindClientAllUseCase {
 
     @Inject
     private ClientDataProvider clientDataProvider;
 
     @Override
-    public List<Client> execute(List<Client> clientList) {
-        return clientDataProvider.saveClientList(clientList);
+    public List<Client> execute() {
+        return clientDataProvider.findClientList();
     }
 }

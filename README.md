@@ -1,6 +1,7 @@
 # X Project
 
 ## Ambiente
+
 ---
 ### Docker Compose
 Executar o comando abaixo a partir da pasta *./app/docker/local/*
@@ -24,7 +25,7 @@ Após login no pgAdmin, seguir os passos abaixo:
 - Criar base de dados manualmente:
   - Abrir o pgAdmin
   - Abrir a aba SQL e executar o comando abaixo:
-    ```postgres-sql
+    ```sql
     create database xprojectdb;
     ```
 - Abrir Servers > Create > Server

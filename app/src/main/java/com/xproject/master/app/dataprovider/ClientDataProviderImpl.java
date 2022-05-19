@@ -18,38 +18,20 @@ public class ClientDataProviderImpl implements ClientDataProvider {
     @Autowired
     private ClientJpaRepository clientData;
 
-    //CLIENTPO
-
-    public ClientPO getClientPOById (Long id) {
-        return clientData.getById(id);
-    }
-
-    public ClientPO saveClientPO (ClientPO clientPO) {
-        return clientData.save(clientPO);
-    }
-
-    public List<ClientPO> saveClientPOList (List<ClientPO> clientPOList) {
-        return clientData.saveAll(clientPOList);
-    }
-
-    public void deleteClientPO (ClientPO clientPO) {
-        clientData.delete(clientPO);
-    }
-
-    public void deleteClientPOList (List<ClientPO> clientPOList) {
-        clientData.deleteAll(clientPOList);
-    }
-
-    // CLIENT
-
     @Override
-    public Client getClientById (Long id) {
-        return ClientMapper.INSTANCE.ofClientPO(getClientPOById(id));
+    public Client findClientById(Long id) {
+        final ClientPO clientPOById = clientData.findById(id).orElse(new ClientPO());
+        return ClientMapper.INSTANCE.ofClientPO(clientPOById);
+    }
+
+    public List<Client> findClientListByIdList (List<Long> idList) {
+        final List<ClientPO> clientPOListById = clientData.findAllById(idList);
+        return ClientMapper.INSTANCE.ofClientPOList(clientPOListById);
     }
 
     @Override
-    public List<Client> getClientList () {
-        List<ClientPO> clientPOList = clientData.findAll();
+    public List<Client> findClientList() {
+        final List<ClientPO> clientPOList = clientData.findAll();
         if(clientPOList.isEmpty()){
             return new ArrayList<>();
         }
@@ -58,11 +40,26 @@ public class ClientDataProviderImpl implements ClientDataProvider {
 
     @Override
     public Client saveClient (Client client) {
-        return ClientMapper.INSTANCE.ofClientPO(this.saveClientPO(ClientPOMapper.INSTANCE.ofClient(client)));
+        final ClientPO clientPOListIn = ClientPOMapper.INSTANCE.ofClient(client);
+        final ClientPO clientPOListOut = clientData.save(clientPOListIn);
+        return ClientMapper.INSTANCE.ofClientPO(clientPOListOut);
     }
 
     @Override
     public List<Client> saveClientList (List<Client> clientList) {
-        return ClientMapper.INSTANCE.ofClientPOList(this.saveClientPOList(ClientPOMapper.INSTANCE.ofClientList(clientList)));
+        final List<ClientPO> clientPOListIn = ClientPOMapper.INSTANCE.ofClientList(clientList);
+        final List<ClientPO> clientPOListOut = clientData.saveAll(clientPOListIn);
+        return ClientMapper.INSTANCE.ofClientPOList(clientPOListOut);
+    }
+
+    @Override
+    public void removeClientById(Long id) {
+        clientData.deleteById(id);
+    }
+
+    @Override
+    public void removeClientList(List<Client> clientList) {
+        final List<ClientPO> clientPOList = ClientPOMapper.INSTANCE.ofClientList(clientList);
+        clientData.deleteAll(clientPOList);
     }
 }
