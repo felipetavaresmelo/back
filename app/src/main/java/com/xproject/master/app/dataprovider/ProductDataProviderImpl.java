@@ -1,9 +1,8 @@
 package com.xproject.master.app.dataprovider;
 
-import com.xproject.master.app.adapter.ProductMapper;
-import com.xproject.master.app.dataprovider.repositories.ProductJpaRepository;
-import com.xproject.master.app.dataprovider.repositories.adapter.ProductPOMapper;
-import com.xproject.master.app.dataprovider.repositories.persistent.ProductPO;
+import com.xproject.master.app.dataprovider.jpa.ProductJpaRepository;
+import com.xproject.master.app.dataprovider.jpa.po.ProductPo;
+import com.xproject.master.app.mappers.ProductMapper;
 import com.xproject.master.domain.dataprovider.ProductDataProvider;
 import com.xproject.master.domain.entity.product.Product;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,36 +19,36 @@ public class ProductDataProviderImpl implements ProductDataProvider {
 
     @Override
     public Product findProductById(Long id) {
-        final ProductPO productPOById = repository.findById(id).orElse(new ProductPO());
-        return ProductMapper.INSTANCE.ofProductPO(productPOById);
+        final ProductPo productPoById = repository.findById(id).orElse(new ProductPo());
+        return ProductMapper.INSTANCE.productPoToProduct(productPoById);
     }
 
     public List<Product> findProductListByIdList (List<Long> idList) {
-        final List<ProductPO> productPOListById = repository.findAllById(idList);
-        return ProductMapper.INSTANCE.ofProductPOList(productPOListById);
+        final List<ProductPo> productPoListById = repository.findAllById(idList);
+        return ProductMapper.INSTANCE.productPoListToProductList(productPoListById);
     }
 
     @Override
     public List<Product> findProductList() {
-        final List<ProductPO> productPOList = repository.findAll();
-        if(productPOList.isEmpty()){
+        final List<ProductPo> productPoList = repository.findAll();
+        if(productPoList.isEmpty()){
             return new ArrayList<>();
         }
-        return ProductMapper.INSTANCE.ofProductPOList(productPOList);
+        return ProductMapper.INSTANCE.productPoListToProductList(productPoList);
     }
 
     @Override
     public Product saveProduct (Product product) {
-        final ProductPO productPOListIn = ProductPOMapper.INSTANCE.ofProduct(product);
-        final ProductPO productPOListOut = repository.save(productPOListIn);
-        return ProductMapper.INSTANCE.ofProductPO(productPOListOut);
+        final ProductPo productPoListIn = ProductMapper.INSTANCE.productToProductPo(product);
+        final ProductPo productPoListOut = repository.save(productPoListIn);
+        return ProductMapper.INSTANCE.productPoToProduct(productPoListOut);
     }
 
     @Override
     public List<Product> saveProductList (List<Product> productList) {
-        final List<ProductPO> producPOListIn = ProductPOMapper.INSTANCE.ofProductList(productList);
-        final List<ProductPO> productPOListOut = repository.saveAll(producPOListIn);
-        return ProductMapper.INSTANCE.ofProductPOList(productPOListOut);
+        final List<ProductPo> producPOListIn = ProductMapper.INSTANCE.productListToProductPoList(productList);
+        final List<ProductPo> productPoListOut = repository.saveAll(producPOListIn);
+        return ProductMapper.INSTANCE.productPoListToProductList(productPoListOut);
     }
 
     @Override
@@ -59,7 +58,7 @@ public class ProductDataProviderImpl implements ProductDataProvider {
 
     @Override
     public void removeProductList(List<Product> productList) {
-        final List<ProductPO> productPOList = ProductPOMapper.INSTANCE.ofProductList(productList);
-        repository.deleteAll(productPOList);
+        final List<ProductPo> productPoList = ProductMapper.INSTANCE.productListToProductPoList(productList);
+        repository.deleteAll(productPoList);
     }
 }

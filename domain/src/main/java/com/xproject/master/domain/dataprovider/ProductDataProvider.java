@@ -1,6 +1,5 @@
 package com.xproject.master.domain.dataprovider;
 
-import com.xproject.master.domain.entity.client.Client;
 import com.xproject.master.domain.entity.product.Product;
 
 import java.util.List;

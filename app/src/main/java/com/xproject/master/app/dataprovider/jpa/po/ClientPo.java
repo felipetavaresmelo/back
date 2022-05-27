@@ -1,16 +1,17 @@
-package com.xproject.master.app.dataprovider.repositories.persistent;
+package com.xproject.master.app.dataprovider.jpa.po;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "CLIENT")
-public class ClientPO implements Serializable {
+public class ClientPo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

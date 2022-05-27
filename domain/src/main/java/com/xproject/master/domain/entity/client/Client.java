@@ -1,6 +1,8 @@
 package com.xproject.master.domain.entity.client;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor

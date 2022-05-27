@@ -1,23 +1,15 @@
-package com.xproject.master.app.dataprovider.repositories.persistent;
+package com.xproject.master.app.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "PRODUCT")
-public class ProductPO implements Serializable {
-
-    private static final long serialVersionUID = 2L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ProductDto {
     private Long id;
     private String title;
     private String subtitle;

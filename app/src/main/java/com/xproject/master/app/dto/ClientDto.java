@@ -1,11 +1,13 @@
 package com.xproject.master.app.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClientDTO {
+public class ClientDto {
 
     private Long id;
     private String name;

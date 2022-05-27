@@ -1,9 +1,9 @@
 package com.xproject.master.app.entrypoint.client;
 
-import com.xproject.master.app.dto.ClientDTO;
+import com.xproject.master.app.dto.ClientDto;
 import com.xproject.master.domain.entity.client.Client;
-import com.xproject.master.domain.usecase.client.FindClientByIdUseCase;
 import com.xproject.master.domain.usecase.client.FindClientAllUseCase;
+import com.xproject.master.domain.usecase.client.FindClientByIdUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,8 +22,8 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.when;
 
 class ClientRestControllerTest {
-    private ClientDTO clientDTO;
-    private List<ClientDTO> clientDTOList;
+    private ClientDto clientDTO;
+    private List<ClientDto> clientDtoList;
     private Client client;
     private List<Client> clientList;
 
@@ -36,17 +36,17 @@ class ClientRestControllerTest {
 
     @BeforeEach
     void setUp() {
-        clientDTOList = new ArrayList<>();
+        clientDtoList = new ArrayList<>();
 
-        clientDTO = new ClientDTO();
+        clientDTO = new ClientDto();
         clientDTO.setName("Maria");
         clientDTO.setPhone("111111111");
-        clientDTOList.add(clientDTO);
+        clientDtoList.add(clientDTO);
 
-        ClientDTO clientDTO2 = new ClientDTO();
-        clientDTO2.setName("Brown");
-        clientDTO2.setPhone("222222222");
-        clientDTOList.add(clientDTO2);
+        ClientDto clientDto2 = new ClientDto();
+        clientDto2.setName("Brown");
+        clientDto2.setPhone("222222222");
+        clientDtoList.add(clientDto2);
 
         clientList = new ArrayList<>();
 
@@ -66,17 +66,17 @@ class ClientRestControllerTest {
     @Test
     @DisplayName("Quando consultar todos os clientes deve retornar com sucesso")
     void getClients() {
-        ResponseEntity<List<ClientDTO>> responseEntityClientDTOList = new ResponseEntity<>(
-                clientDTOList,
+        ResponseEntity<List<ClientDto>> responseEntityClientDTOList = new ResponseEntity<>(
+                clientDtoList,
                 new HttpHeaders(),
                 HttpStatus.OK
         );
         when(getClientList.execute()).thenReturn(clientList);
 
-        ResponseEntity<List<ClientDTO>> result = clientRestController.findClientAll();
+        ResponseEntity<List<ClientDto>> result = clientRestController.findClientAll();
 
         assertEquals(responseEntityClientDTOList, result);
-        assertEquals(clientDTOList, result.getBody());
+        assertEquals(clientDtoList, result.getBody());
     }
 
     @Test
@@ -84,14 +84,14 @@ class ClientRestControllerTest {
     void getClientById() {
 
         HttpHeaders header = new HttpHeaders();
-        ResponseEntity<ClientDTO> responseEntityClientDTO = new ResponseEntity<>(
+        ResponseEntity<ClientDto> responseEntityClientDTO = new ResponseEntity<>(
                 clientDTO,
                 header,
                 HttpStatus.OK
         );
         when(getClientById.execute(any())).thenReturn(client);
 
-        ResponseEntity<ClientDTO> result = clientRestController.findClientById(1L);
+        ResponseEntity<ClientDto> result = clientRestController.findClientById(1L);
 
         assertEquals(responseEntityClientDTO, result);
         assertEquals(clientDTO, result.getBody());

@@ -1,9 +1,8 @@
 package com.xproject.master.app.dataprovider;
 
-import com.xproject.master.app.adapter.ClientMapper;
-import com.xproject.master.app.dataprovider.repositories.ClientJpaRepository;
-import com.xproject.master.app.dataprovider.repositories.adapter.ClientPOMapper;
-import com.xproject.master.app.dataprovider.repositories.persistent.ClientPO;
+import com.xproject.master.app.dataprovider.jpa.ClientJpaRepository;
+import com.xproject.master.app.dataprovider.jpa.po.ClientPo;
+import com.xproject.master.app.mappers.ClientMapper;
 import com.xproject.master.domain.dataprovider.ClientDataProvider;
 import com.xproject.master.domain.entity.client.Client;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,36 +19,36 @@ public class ClientDataProviderImpl implements ClientDataProvider {
 
     @Override
     public Client findClientById(Long id) {
-        final ClientPO clientPOById = repository.findById(id).orElse(new ClientPO());
-        return ClientMapper.INSTANCE.ofClientPO(clientPOById);
+        final ClientPo clientPoById = repository.findById(id).orElse(new ClientPo());
+        return ClientMapper.INSTANCE.clientPOtoClient(clientPoById);
     }
 
     public List<Client> findClientListByIdList (List<Long> idList) {
-        final List<ClientPO> clientPOListById = repository.findAllById(idList);
-        return ClientMapper.INSTANCE.ofClientPOList(clientPOListById);
+        final List<ClientPo> clientPoListById = repository.findAllById(idList);
+        return ClientMapper.INSTANCE.clientPOListToClientList(clientPoListById);
     }
 
     @Override
     public List<Client> findClientList() {
-        final List<ClientPO> clientPOList = repository.findAll();
-        if(clientPOList.isEmpty()){
+        final List<ClientPo> clientPoList = repository.findAll();
+        if(clientPoList.isEmpty()){
             return new ArrayList<>();
         }
-        return ClientMapper.INSTANCE.ofClientPOList(clientPOList);
+        return ClientMapper.INSTANCE.clientPOListToClientList(clientPoList);
     }
 
     @Override
     public Client saveClient (Client client) {
-        final ClientPO clientPOListIn = ClientPOMapper.INSTANCE.ofClient(client);
-        final ClientPO clientPOListOut = repository.save(clientPOListIn);
-        return ClientMapper.INSTANCE.ofClientPO(clientPOListOut);
+        final ClientPo clientPoListIn = ClientMapper.INSTANCE.clientToClientPo(client);
+        final ClientPo clientPoListOut = repository.save(clientPoListIn);
+        return ClientMapper.INSTANCE.clientPOtoClient(clientPoListOut);
     }
 
     @Override
     public List<Client> saveClientList (List<Client> clientList) {
-        final List<ClientPO> clientPOListIn = ClientPOMapper.INSTANCE.ofClientList(clientList);
-        final List<ClientPO> clientPOListOut = repository.saveAll(clientPOListIn);
-        return ClientMapper.INSTANCE.ofClientPOList(clientPOListOut);
+        final List<ClientPo> clientPoListIn = ClientMapper.INSTANCE.clientListToClientPoList(clientList);
+        final List<ClientPo> clientPoListOut = repository.saveAll(clientPoListIn);
+        return ClientMapper.INSTANCE.clientPOListToClientList(clientPoListOut);
     }
 
     @Override
@@ -59,7 +58,7 @@ public class ClientDataProviderImpl implements ClientDataProvider {
 
     @Override
     public void removeClientList(List<Client> clientList) {
-        final List<ClientPO> clientPOList = ClientPOMapper.INSTANCE.ofClientList(clientList);
-        repository.deleteAll(clientPOList);
+        final List<ClientPo> clientPoList = ClientMapper.INSTANCE.clientListToClientPoList(clientList);
+        repository.deleteAll(clientPoList);
     }
 }
