@@ -4,6 +4,7 @@ import com.xproject.master.app.dto.ProductDto;
 import com.xproject.master.app.mappers.ProductMapper;
 import com.xproject.master.domain.entity.product.Product;
 import com.xproject.master.domain.usecase.client.*;
+import com.xproject.master.domain.usecase.product.FindProductByIdUseCase;
 import com.xproject.master.domain.usecase.product.SaveProductUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
@@ -19,7 +20,7 @@ import java.util.Objects;
 public class ProductRestController {
 
     private FindClientAllUseCase findClientAllUseCase;
-    private FindClientByIdUseCase findClientByIdUseCase;
+    private FindProductByIdUseCase findClientByIdUseCase;
     private SaveProductUseCase saveProductUseCase;
     private SaveClientListUseCase saveClientListUseCase;
     private RemoveClientByIdUseCase removeClientByIdUseCase;
@@ -29,17 +30,17 @@ public class ProductRestController {
     public ResponseEntity findIndex() {
         return ResponseEntity.notFound().build();
     }
-//
-//    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<ClientDTO> findClientById(@PathVariable Long id) {
-//        if(Objects.nonNull(id)) {
-//            final Client client = findClientByIdUseCase.execute(id);
-//            final ClientDTO clientDTO = ClientDTOMapper.INSTANCE.ofClient(client);
-//            return ResponseEntity.ok().body(clientDTO);
-//        }
-//        return ResponseEntity.notFound().build();
-//    }
-//
+
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ProductDto> findProductById(@PathVariable Long id) {
+        if(Objects.nonNull(id)) {
+            final Product product = findClientByIdUseCase.execute(id);
+            final ProductDto productDto = ProductMapper.INSTANCE.productToProductDto(product);
+            return ResponseEntity.ok().body(productDto);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
 //    @GetMapping(value = "all", produces = MediaType.APPLICATION_JSON_VALUE)
 //    public ResponseEntity<List<ClientDTO>> findClientAll() {
 //        final List<Client> clientList = findClientAllUseCase.execute();
