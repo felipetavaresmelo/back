@@ -4,6 +4,7 @@ import com.xproject.master.app.dto.ProductDto;
 import com.xproject.master.app.mappers.ProductMapper;
 import com.xproject.master.domain.entity.product.Product;
 import com.xproject.master.domain.usecase.client.*;
+import com.xproject.master.domain.usecase.product.FindProductAllUseCase;
 import com.xproject.master.domain.usecase.product.FindProductByIdUseCase;
 import com.xproject.master.domain.usecase.product.SaveProductUseCase;
 import lombok.AllArgsConstructor;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Objects;
 
 @RestController
@@ -19,7 +21,7 @@ import java.util.Objects;
 @AllArgsConstructor
 public class ProductRestController {
 
-    private FindClientAllUseCase findClientAllUseCase;
+    private FindProductAllUseCase findProductAllUseCase;
     private FindProductByIdUseCase findClientByIdUseCase;
     private SaveProductUseCase saveProductUseCase;
     private SaveClientListUseCase saveClientListUseCase;
@@ -41,12 +43,12 @@ public class ProductRestController {
         return ResponseEntity.notFound().build();
     }
 
-//    @GetMapping(value = "all", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<List<ClientDTO>> findClientAll() {
-//        final List<Client> clientList = findClientAllUseCase.execute();
-//        final List<ClientDTO> clientDTOList = ClientDTOMapper.INSTANCE.ofClientList(clientList);
-//        return ResponseEntity.ok().body(clientDTOList);
-//    }
+    @GetMapping(value = "all", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<ProductDto>> findProductAll() {
+        final List<Product> productList = findProductAllUseCase.execute();
+        final List<ProductDto> productDtoList = ProductMapper.INSTANCE.productListToProductDtoList(productList);
+        return ResponseEntity.ok().body(productDtoList);
+    }
 
     @PutMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ProductDto> saveProduct(@RequestBody ProductDto productDTO) {
