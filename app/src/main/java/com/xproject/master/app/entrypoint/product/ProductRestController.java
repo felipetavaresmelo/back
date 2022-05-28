@@ -6,6 +6,7 @@ import com.xproject.master.domain.entity.product.Product;
 import com.xproject.master.domain.usecase.client.*;
 import com.xproject.master.domain.usecase.product.FindProductAllUseCase;
 import com.xproject.master.domain.usecase.product.FindProductByIdUseCase;
+import com.xproject.master.domain.usecase.product.RemoveProductByIdUseCase;
 import com.xproject.master.domain.usecase.product.SaveProductUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
@@ -25,7 +26,7 @@ public class ProductRestController {
     private FindProductByIdUseCase findClientByIdUseCase;
     private SaveProductUseCase saveProductUseCase;
     private SaveClientListUseCase saveClientListUseCase;
-    private RemoveClientByIdUseCase removeClientByIdUseCase;
+    private RemoveProductByIdUseCase removeProductByIdUseCase;
     private RemoveClientListUseCase removeClientListUseCase;
 
     @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -71,16 +72,16 @@ public class ProductRestController {
 //        }
 //        return ResponseEntity.notFound().build();
 //    }
-//
-//    @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<ClientDTO> removeClientById(@PathVariable Long id) {
-//        if(Objects.nonNull(id)) {
-//            removeClientByIdUseCase.execute(id);
-//            return ResponseEntity.ok().build();
-//        }
-//        return ResponseEntity.notFound().build();
-//    }
-//
+
+    @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ProductDto> removeProductById(@PathVariable Long id) {
+        if(Objects.nonNull(id)) {
+            removeProductByIdUseCase.execute(id);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
 //    @DeleteMapping(value = "list", produces = MediaType.APPLICATION_JSON_VALUE)
 //    public ResponseEntity removeClientList(@RequestBody List<ClientDTO> clientDTOList) {
 //        if(Objects.nonNull(clientDTOList)) {
