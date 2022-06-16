@@ -1,0 +1,17 @@
+{
+  "mappings": [
+    {
+      "request": {
+        "url": "/client/1",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "bodyFileName": "client/get-client-1.json"
+      }
+    }
+  ]
+}
