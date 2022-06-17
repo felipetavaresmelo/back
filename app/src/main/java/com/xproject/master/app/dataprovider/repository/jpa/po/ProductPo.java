@@ -1,4 +1,4 @@
-package com.xproject.master.app.dataprovider.jpa.po;
+package com.xproject.master.app.dataprovider.repository.jpa.po;
 
 import lombok.*;
 

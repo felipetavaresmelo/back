@@ -1,6 +1,6 @@
 package com.xproject.master.app.config;
 
-import com.xproject.master.app.dataprovider.ClientDataProviderImpl;
+import com.xproject.master.app.dataprovider.repository.ClientDataProviderImpl;
 import com.xproject.master.domain.entity.client.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
