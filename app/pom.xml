@@ -37,9 +37,6 @@
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <mapstruct-processor.version>1.4.2.Final</mapstruct-processor.version>
         <jakarta.xml.bind-api.version>2.3.2</jakarta.xml.bind-api.version>
-        <io.springfox-version>3.0.0</io.springfox-version>
-
-        <spring.boot.maven.plugin>2.6.2</spring.boot.maven.plugin>
 
     </properties>
 
@@ -104,34 +101,5 @@
             <scope>runtime</scope>
         </dependency>
 
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-boot-starter</artifactId>
-            <version>${io.springfox-version}</version>
-        </dependency>
-
     </dependencies>
-
-    <build>
-        <plugins>
-<!--            <plugin>-->
-<!--                <groupId>org.springframework.boot</groupId>-->
-<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
-<!--                <version>${spring.boot.maven.plugin}</version>-->
-<!--                <configuration>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-compiler-plugin</artifactId>-->
-<!--                <version>3.8.1</version>-->
-<!--                <configuration>-->
-<!--                    <source>${java.version}</source> &lt;!&ndash; depending on your project &ndash;&gt;-->
-<!--                    <target>${java.version}</target> &lt;!&ndash; depending on your project &ndash;&gt;-->
-<!--                    <annotationProcessorPaths>-->
-<!--                    </annotationProcessorPaths>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
-        </plugins>
-    </build>
 </project>
