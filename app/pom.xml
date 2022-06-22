@@ -37,6 +37,8 @@
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <mapstruct-processor.version>1.4.2.Final</mapstruct-processor.version>
         <jakarta.xml.bind-api.version>2.3.2</jakarta.xml.bind-api.version>
+        <spring.boot.maven.plugin>2.6.2</spring.boot.maven.plugin>
+        <swagger-openapi-version>1.6.9</swagger-openapi-version>
 
     </properties>
 
@@ -100,6 +102,12 @@
             <version>${h2.version}</version>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>${swagger-openapi-version}</version>
+        </dependency>
+
 
     </dependencies>
 </project>
