@@ -16,7 +16,7 @@ import java.util.List;
 
 public interface ClientController extends ApiInfo {
 
-    @Operation(summary = "descrição",
+    @Operation(summary = "Busca de cliente pelo id",
             parameters = {
                     @Parameter(
                             schema = @Schema(
