@@ -110,27 +110,4 @@
 
 
     </dependencies>
-
-    <build>
-        <plugins>
-<!--            <plugin>-->
-<!--                <groupId>org.springframework.boot</groupId>-->
-<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
-<!--                <version>${spring.boot.maven.plugin}</version>-->
-<!--                <configuration>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-compiler-plugin</artifactId>-->
-<!--                <version>3.8.1</version>-->
-<!--                <configuration>-->
-<!--                    <source>${java.version}</source> &lt;!&ndash; depending on your project &ndash;&gt;-->
-<!--                    <target>${java.version}</target> &lt;!&ndash; depending on your project &ndash;&gt;-->
-<!--                    <annotationProcessorPaths>-->
-<!--                    </annotationProcessorPaths>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
-        </plugins>
-    </build>
 </project>
