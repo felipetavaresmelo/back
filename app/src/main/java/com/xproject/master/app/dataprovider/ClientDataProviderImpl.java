@@ -61,4 +61,12 @@ public class ClientDataProviderImpl implements ClientDataProvider {
         final List<ClientPo> clientPoList = ClientMapper.INSTANCE.clientListToClientPoList(clientList);
         repository.deleteAll(clientPoList);
     }
+    @Override
+    public Client updateClient(Long id, Client client){
+        final ClientPo clientPoOut = repository.findById(id).orElse(new ClientPo());
+        clientPoOut.setName(client.getName());
+        clientPoOut.setPhone(client.getPhone());
+        final ClientPo clientPoIn = repository.save(clientPoOut);
+        return ClientMapper.INSTANCE.clientPOtoClient(clientPoIn);
+    }
 }
