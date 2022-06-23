@@ -21,6 +21,7 @@ public class ClientRestController implements ClientController {
     private FindClientAllUseCase findClientAllUseCase;
     private FindClientByIdUseCase findClientByIdUseCase;
     private SaveClientUseCase saveClientUseCase;
+    private UpdateClientUseCase updateClientUseCase;
     private SaveClientListUseCase saveClientListUseCase;
     private RemoveClientByIdUseCase removeClientByIdUseCase;
     private RemoveClientListUseCase removeClientListUseCase;
@@ -47,7 +48,7 @@ public class ClientRestController implements ClientController {
         return ResponseEntity.ok().body(clientDtoList);
     }
 
-    @PutMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ClientDto> saveClient(@RequestBody ClientDto clientDTO) {
         if(Objects.nonNull(clientDTO)) {
             final Client client = ClientMapper.INSTANCE.clientDtoToClient(clientDTO);
@@ -58,7 +59,7 @@ public class ClientRestController implements ClientController {
         return ResponseEntity.notFound().build();
     }
 
-    @PutMapping(value = "list", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "list", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ClientDto>> saveClientList(@RequestBody List<ClientDto> clientDtoList) {
         if(Objects.nonNull(clientDtoList)) {
             final List<Client> clientList = ClientMapper.INSTANCE.clientDtoListToClientList(clientDtoList);
@@ -84,6 +85,16 @@ public class ClientRestController implements ClientController {
             final List<Client> clientList = ClientMapper.INSTANCE.clientDtoListToClientList(clientDtoList);
             removeClientListUseCase.execute(clientList);
             return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+    @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ClientDto> updateClient(@PathVariable Long id, @RequestBody ClientDto clientDTO) {
+        if(Objects.nonNull(clientDTO)) {
+            final Client client = ClientMapper.INSTANCE.clientDtoToClient(clientDTO);
+            final Client clientResponse = updateClientUseCase.execute(id, client);
+            final ClientDto clientDtoResponse = ClientMapper.INSTANCE.clientToClientDto(clientResponse);
+            return ResponseEntity.ok().body(clientDtoResponse);
         }
         return ResponseEntity.notFound().build();
     }

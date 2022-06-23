@@ -18,4 +18,6 @@ public interface ClientDataProvider {
     void removeClientById(Long id);
 
     void removeClientList(List<Client> clientList);
+
+    Client updateClient(Long id, Client client);
 }
