@@ -1,19 +1,19 @@
 package com.xproject.master.app.dataprovider.cep;
 
-import com.xproject.master.app.dataprovider.cep.client.CepClient;
+import com.xproject.master.app.dataprovider.cep.feignclient.CepClient;
 import com.xproject.master.domain.dataprovider.CepDataProvider;
 import com.xproject.master.domain.entity.adreess.Adreess;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
-@Component
-@RequiredArgsConstructor
+@Service
 public class CepDataProviderImpl implements CepDataProvider {
 
-    private final CepClient cepClient;
+    @Autowired
+    private CepClient cepClient;
 
     public Adreess getAdreessByCep (String cep){
         ResponseEntity<Adreess> adreess = cepClient.getAdreessByCep(cep);

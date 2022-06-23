@@ -1,4 +1,4 @@
-package com.xproject.master.app.dataprovider.cep.client;
+package com.xproject.master.app.dataprovider.cep.feignclient;
 
 import com.xproject.master.domain.entity.adreess.Adreess;
 import org.springframework.cloud.openfeign.FeignClient;
