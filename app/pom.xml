@@ -23,7 +23,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <spring.boot.starter.web.version>2.6.7</spring.boot.starter.web.version>
+        <spring.boot.starter.web.version>2.7.0</spring.boot.starter.web.version>
+        <spring-boot-starter-test.version>2.7.0</spring-boot-starter-test.version>
         <spring.boot.starter.data.jpa.version>2.6.5</spring.boot.starter.data.jpa.version>
         <lombok.version>1.18.24</lombok.version>
         <junit.jupiter.api.version>5.8.2</junit.jupiter.api.version>
@@ -36,9 +37,9 @@
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <mapstruct-processor.version>1.4.2.Final</mapstruct-processor.version>
         <jakarta.xml.bind-api.version>2.3.2</jakarta.xml.bind-api.version>
-        <spring-boot-starter-test.version>2.6.7</spring-boot-starter-test.version>
-
         <spring.boot.maven.plugin>2.6.2</spring.boot.maven.plugin>
+        <swagger-openapi-version>1.6.9</swagger-openapi-version>
+
     </properties>
 
     <dependencies>
@@ -107,28 +108,11 @@
             <artifactId>spring-cloud-starter-openfeign</artifactId>
             <version>3.0.2</version>
         </dependency>
-    </dependencies>
 
-    <build>
-        <plugins>
-<!--            <plugin>-->
-<!--                <groupId>org.springframework.boot</groupId>-->
-<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
-<!--                <version>${spring.boot.maven.plugin}</version>-->
-<!--                <configuration>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-compiler-plugin</artifactId>-->
-<!--                <version>3.8.1</version>-->
-<!--                <configuration>-->
-<!--                    <source>${java.version}</source> &lt;!&ndash; depending on your project &ndash;&gt;-->
-<!--                    <target>${java.version}</target> &lt;!&ndash; depending on your project &ndash;&gt;-->
-<!--                    <annotationProcessorPaths>-->
-<!--                    </annotationProcessorPaths>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
-        </plugins>
-    </build>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>${swagger-openapi-version}</version>
+        </dependency>
+    </dependencies>
 </project>
