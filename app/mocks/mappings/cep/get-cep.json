@@ -1,0 +1,17 @@
+{
+  "mappings": [
+    {
+      "request": {
+        "url": "/cep/51020000",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "bodyFileName": "cep/get-cep-51020000.json"
+      }
+    }
+  ]
+}
