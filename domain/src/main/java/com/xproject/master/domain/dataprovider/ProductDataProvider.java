@@ -18,4 +18,6 @@ public interface ProductDataProvider {
     void removeProductById(Long id);
 
     void removeProductList(List<Product> productList);
+
+    Product updateProduct(Long id, Product product);
 }

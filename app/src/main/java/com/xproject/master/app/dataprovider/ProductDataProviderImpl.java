@@ -61,4 +61,19 @@ public class ProductDataProviderImpl implements ProductDataProvider {
         final List<ProductPo> productPoList = ProductMapper.INSTANCE.productListToProductPoList(productList);
         repository.deleteAll(productPoList);
     }
+
+    @Override
+    public Product updateProduct(Long id, Product product) {
+        final ProductPo productPoOut = repository.findById(id).orElse(new ProductPo());
+        productPoOut.setTitle(product.getTitle());
+        productPoOut.setSubtitle(product.getSubtitle());
+        productPoOut.setDescription(product.getDescription());
+        productPoOut.setAvailableQuantity(product.getAvailableQuantity());
+        productPoOut.setSoldQuantity(product.getSoldQuantity());
+        productPoOut.setOriginalPrice(product.getOriginalPrice());
+        productPoOut.setPrice(product.getPrice());
+        final ProductPo productPoIn = repository.save(productPoOut);
+        return ProductMapper.INSTANCE.productPoToProduct(productPoIn);
+
+    }
 }
