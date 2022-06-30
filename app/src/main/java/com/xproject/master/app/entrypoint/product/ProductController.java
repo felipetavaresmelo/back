@@ -10,9 +10,9 @@ public interface ProductController extends ApiInfo {
 
     ResponseEntity<ProductDto> findProductById(Long id);
     ResponseEntity<List<ProductDto>> findProductAll();
-    ResponseEntity<ProductDto> saveProduct(ProductDto productDTO);
-    ResponseEntity<List<ProductDto>> saveProductList(List<ProductDto> productDtoList);
-    ResponseEntity<ProductDto> removeProductById(Long id);
-    ResponseEntity<Void> removeProductList(List<ProductDto> productDtoList);
-    ResponseEntity<ProductDto> updateProduct(Long id, ProductDto productDTO);
+    ResponseEntity<ProductDto> createProduct(ProductDto productDTO);
+    ResponseEntity<List<ProductDto>> createProductList(List<ProductDto> productDtoList);
+    ResponseEntity<ProductDto> deleteProductById(Long id);
+    ResponseEntity<Void> deleteProductList(List<ProductDto> productDtoList);
+    ResponseEntity<ProductDto> updateProduct(ProductDto productDTO);
 }

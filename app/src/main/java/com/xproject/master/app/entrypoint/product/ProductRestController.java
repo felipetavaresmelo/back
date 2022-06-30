@@ -3,7 +3,6 @@ package com.xproject.master.app.entrypoint.product;
 import com.xproject.master.app.dto.ProductDto;
 import com.xproject.master.app.mappers.ProductMapper;
 import com.xproject.master.domain.entity.product.Product;
-import com.xproject.master.domain.usecase.client.*;
 import com.xproject.master.domain.usecase.product.*;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
@@ -50,7 +49,7 @@ public class ProductRestController implements ProductController {
     }
 
     @PostMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ProductDto> saveProduct(@RequestBody ProductDto productDTO) {
+    public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDTO) {
         if(Objects.nonNull(productDTO)) {
             final Product product = ProductMapper.INSTANCE.productDtoToProduct(productDTO);
             final Product productResponse = saveProductUseCase.execute(product);
@@ -61,7 +60,7 @@ public class ProductRestController implements ProductController {
     }
 
     @PostMapping(value = "list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<ProductDto>> saveProductList(@RequestBody List<ProductDto> productDtoList) {
+    public ResponseEntity<List<ProductDto>> createProductList(@RequestBody List<ProductDto> productDtoList) {
         if(Objects.nonNull(productDtoList)) {
             final List<Product> productList = ProductMapper.INSTANCE.productDtoListToProductList(productDtoList);
             final List<Product> propductListResponse = saveProductListUseCase.execute(productList);
@@ -72,7 +71,7 @@ public class ProductRestController implements ProductController {
     }
 
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ProductDto> removeProductById(@PathVariable Long id) {
+    public ResponseEntity<ProductDto> deleteProductById(@PathVariable Long id) {
         if(Objects.nonNull(id)) {
             removeProductByIdUseCase.execute(id);
             return ResponseEntity.ok().build();
@@ -81,7 +80,7 @@ public class ProductRestController implements ProductController {
     }
 
     @DeleteMapping(value = "list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> removeProductList(@RequestBody List<ProductDto> productDtoList) {
+    public ResponseEntity<Void> deleteProductList(@RequestBody List<ProductDto> productDtoList) {
         if(Objects.nonNull(productDtoList)) {
             final List<Product> productList = ProductMapper.INSTANCE.productDtoListToProductList(productDtoList);
             removeClientListUseCase.execute(productList);
@@ -90,10 +89,10 @@ public class ProductRestController implements ProductController {
         return ResponseEntity.notFound().build();
     }
     @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ProductDto> updateProduct(@PathVariable Long id, @RequestBody ProductDto productDTO){
+    public ResponseEntity<ProductDto> updateProduct(@RequestBody ProductDto productDTO){
        if(Objects.nonNull(productDTO)){
            final Product product = ProductMapper.INSTANCE.productDtoToProduct(productDTO);
-           final Product productResponse = updateProductUseCase.execute(id, product);
+           final Product productResponse = updateProductUseCase.execute(product);
            final ProductDto productDtoResponse = ProductMapper.INSTANCE.productToProductDto(productResponse);
            return ResponseEntity.ok().body(productDtoResponse);
        }

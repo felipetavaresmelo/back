@@ -19,5 +19,4 @@ public interface ProductDataProvider {
 
     void removeProductList(List<Product> productList);
 
-    Product updateProduct(Long id, Product product);
 }

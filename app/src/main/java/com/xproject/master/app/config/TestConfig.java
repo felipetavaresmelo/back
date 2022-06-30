@@ -2,7 +2,6 @@ package com.xproject.master.app.config;
 
 import com.xproject.master.app.dataprovider.ClientDataProviderImpl;
 import com.xproject.master.app.dataprovider.ProductDataProviderImpl;
-import com.xproject.master.domain.dataprovider.ProductDataProvider;
 import com.xproject.master.domain.entity.client.Client;
 import com.xproject.master.domain.entity.product.Product;
 import org.springframework.beans.factory.annotation.Autowired;

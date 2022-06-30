@@ -20,10 +20,10 @@ public class UpdateProductUseCaseImpl implements UpdateProductUseCase {
     private FindProductByIdUseCase findProductByIdUseCase;
 
     @Override
-    public Product execute(long id, Product product) {
-        final Product productObj = findProductByIdUseCase.execute(id);
+    public Product execute(Product product) {
+        final Product productObj = findProductByIdUseCase.execute(product.getId());
         if(Objects.nonNull(productObj) && Objects.nonNull(productObj.getId())){
-            return productDataProvider.updateProduct(id, product);
+            return productDataProvider.saveProduct(product);
         }else{
             throw new NoSuchElementException("Find product by id not found");
         }
