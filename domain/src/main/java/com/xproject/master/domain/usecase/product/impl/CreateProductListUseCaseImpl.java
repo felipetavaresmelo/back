@@ -2,14 +2,14 @@ package com.xproject.master.domain.usecase.product.impl;
 
 import com.xproject.master.domain.dataprovider.ProductDataProvider;
 import com.xproject.master.domain.entity.product.Product;
-import com.xproject.master.domain.usecase.product.SaveProductListUseCase;
+import com.xproject.master.domain.usecase.product.CreateProductListUseCase;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
 
 @Named
-public class SaveProductListUseCaseImpl implements SaveProductListUseCase {
+public class CreateProductListUseCaseImpl implements CreateProductListUseCase {
 
     @Inject
     private ProductDataProvider productDataProvider;

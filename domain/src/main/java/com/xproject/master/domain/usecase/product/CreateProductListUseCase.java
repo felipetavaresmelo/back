@@ -4,6 +4,6 @@ import com.xproject.master.domain.entity.product.Product;
 
 import java.util.List;
 
-public interface SaveProductListUseCase {
+public interface CreateProductListUseCase {
     List<Product> execute(List<Product> productList);
 }

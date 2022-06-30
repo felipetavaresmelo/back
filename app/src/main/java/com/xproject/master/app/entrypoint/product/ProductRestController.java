@@ -3,7 +3,6 @@ package com.xproject.master.app.entrypoint.product;
 import com.xproject.master.app.dto.ProductDto;
 import com.xproject.master.app.mappers.ProductMapper;
 import com.xproject.master.domain.entity.product.Product;
-import com.xproject.master.domain.usecase.client.*;
 import com.xproject.master.domain.usecase.product.*;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
@@ -21,8 +20,8 @@ public class ProductRestController {
 
     private FindProductAllUseCase findProductAllUseCase;
     private FindProductByIdUseCase findClientByIdUseCase;
-    private SaveProductUseCase saveProductUseCase;
-    private SaveProductListUseCase saveProductListUseCase;
+    private CreateProductUseCase createProductUseCase;
+    private CreateProductListUseCase createProductListUseCase;
     private RemoveProductByIdUseCase removeProductByIdUseCase;
     private RemoveProductListUseCase removeClientListUseCase;
 
@@ -49,10 +48,10 @@ public class ProductRestController {
     }
 
     @PutMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ProductDto> saveProduct(@RequestBody ProductDto productDTO) {
+    public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDTO) {
         if(Objects.nonNull(productDTO)) {
             final Product product = ProductMapper.INSTANCE.productDtoToProduct(productDTO);
-            final Product productResponse = saveProductUseCase.execute(product);
+            final Product productResponse = createProductUseCase.execute(product);
             final ProductDto productDtoResponse = ProductMapper.INSTANCE.productToProductDto(productResponse);
             return ResponseEntity.created(URI.create("/product/" + productDtoResponse.getId())).body(productDtoResponse);
         }
@@ -60,10 +59,10 @@ public class ProductRestController {
     }
 
     @PutMapping(value = "list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<ProductDto>> saveProductList(@RequestBody List<ProductDto> productDtoList) {
+    public ResponseEntity<List<ProductDto>> createProductList(@RequestBody List<ProductDto> productDtoList) {
         if(Objects.nonNull(productDtoList)) {
             final List<Product> productList = ProductMapper.INSTANCE.productDtoListToProductList(productDtoList);
-            final List<Product> propductListResponse = saveProductListUseCase.execute(productList);
+            final List<Product> propductListResponse = createProductListUseCase.execute(productList);
             final List<ProductDto> clientDTOListResponse = ProductMapper.INSTANCE.productListToProductDtoList(propductListResponse);
             return ResponseEntity.created(URI.create("/client/list")).body(clientDTOListResponse);
         }
