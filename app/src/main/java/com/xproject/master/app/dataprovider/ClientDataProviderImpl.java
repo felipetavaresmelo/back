@@ -41,7 +41,6 @@ public class ClientDataProviderImpl implements ClientDataProvider {
     @Override
     public Client saveClient (Client client) {
         final ClientPo clientPoListIn = ClientMapper.INSTANCE.clientToClientPo(client);
-        clientPoListIn.setId(null);
         final ClientPo clientPoListOut = repository.save(clientPoListIn);
         return ClientMapper.INSTANCE.clientPOtoClient(clientPoListOut);
     }
@@ -49,9 +48,6 @@ public class ClientDataProviderImpl implements ClientDataProvider {
     @Override
     public List<Client> saveClientList (List<Client> clientList) {
         final List<ClientPo> clientPoListIn = ClientMapper.INSTANCE.clientListToClientPoList(clientList);
-        for(ClientPo clientPo : clientPoListIn){
-            clientPo.setId(null);
-        }
         final List<ClientPo> clientPoListOut = repository.saveAll(clientPoListIn);
         return ClientMapper.INSTANCE.clientPOListToClientList(clientPoListOut);
     }

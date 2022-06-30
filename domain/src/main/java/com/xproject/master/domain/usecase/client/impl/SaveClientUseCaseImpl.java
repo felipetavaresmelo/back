@@ -15,6 +15,7 @@ public class SaveClientUseCaseImpl implements SaveClientUseCase {
 
     @Override
     public Client execute(Client client) {
+        client.setId(null);
         return clientDataProvider.saveClient(client);
     }
 }

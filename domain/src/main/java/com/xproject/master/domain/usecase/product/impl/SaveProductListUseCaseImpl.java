@@ -16,6 +16,9 @@ public class SaveProductListUseCaseImpl implements SaveProductListUseCase {
 
     @Override
     public List<Product> execute(List<Product> productList) {
+        for(Product prod: productList){
+            prod.setId(null);
+        }
         return productDataProvider.saveProductList(productList);
     }
 }

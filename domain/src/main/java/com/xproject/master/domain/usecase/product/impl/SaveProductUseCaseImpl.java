@@ -14,6 +14,7 @@ public class SaveProductUseCaseImpl implements com.xproject.master.domain.usecas
 
     @Override
     public Product execute(Product product) {
+        product.setId(null);
         return productDataProvider.saveProduct(product);
     }
 }

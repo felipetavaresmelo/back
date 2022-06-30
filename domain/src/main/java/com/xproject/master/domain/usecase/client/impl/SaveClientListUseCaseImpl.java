@@ -16,6 +16,9 @@ public class SaveClientListUseCaseImpl implements SaveClientListUseCase {
 
     @Override
     public List<Client> execute(List<Client> clientList) {
+        for(Client cli : clientList){
+            cli.setId(null);
+        }
         return clientDataProvider.saveClientList(clientList);
     }
 }
