@@ -89,10 +89,10 @@ public class ProductRestController implements ProductController {
         return ResponseEntity.notFound().build();
     }
     @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ProductDto> updateProduct(@RequestBody ProductDto productDTO){
+    public ResponseEntity<ProductDto> updateProduct(@PathVariable Long id, @RequestBody ProductDto productDTO){
        if(Objects.nonNull(productDTO)){
            final Product product = ProductMapper.INSTANCE.productDtoToProduct(productDTO);
-           final Product productResponse = updateProductUseCase.execute(product);
+           final Product productResponse = updateProductUseCase.execute(id, product);
            final ProductDto productDtoResponse = ProductMapper.INSTANCE.productToProductDto(productResponse);
            return ResponseEntity.ok().body(productDtoResponse);
        }

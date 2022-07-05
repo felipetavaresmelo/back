@@ -14,5 +14,5 @@ public interface ProductController extends ApiInfo {
     ResponseEntity<List<ProductDto>> createProductList(List<ProductDto> productDtoList);
     ResponseEntity<ProductDto> deleteProductById(Long id);
     ResponseEntity<Void> deleteProductList(List<ProductDto> productDtoList);
-    ResponseEntity<ProductDto> updateProduct(ProductDto productDTO);
+    ResponseEntity<ProductDto> updateProduct(Long id, ProductDto productDTO);
 }
