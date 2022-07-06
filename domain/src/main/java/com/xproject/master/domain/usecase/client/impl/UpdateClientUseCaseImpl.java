@@ -3,7 +3,6 @@ package com.xproject.master.domain.usecase.client.impl;
 import com.xproject.master.domain.dataprovider.ClientDataProvider;
 import com.xproject.master.domain.entity.client.Client;
 import com.xproject.master.domain.usecase.client.FindClientByIdUseCase;
-import com.xproject.master.domain.usecase.client.RemoveClientByIdUseCase;
 import com.xproject.master.domain.usecase.client.UpdateClientUseCase;
 
 import javax.inject.Inject;
