@@ -23,8 +23,8 @@ public class ClientRestController implements ClientController {
     private CreateClientUseCase createClientUseCase;
     private UpdateClientUseCase updateClientUseCase;
     private CreateClientListUseCase createClientListUseCase;
-    private RemoveClientByIdUseCase removeClientByIdUseCase;
-    private RemoveClientListUseCase removeClientListUseCase;
+    private DeleteClientByIdUseCase deleteClientByIdUseCase;
+    private DeleteClientListUseCase deleteClientListUseCase;
 
     @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ClientDto> findIndex() {
@@ -71,19 +71,19 @@ public class ClientRestController implements ClientController {
     }
 
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ClientDto> removeClientById(@PathVariable Long id) {
+    public ResponseEntity<ClientDto> deleteClientById(@PathVariable Long id) {
         if(Objects.nonNull(id)) {
-            removeClientByIdUseCase.execute(id);
+            deleteClientByIdUseCase.execute(id);
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping(value = "list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity removeClientList(@RequestBody List<ClientDto> clientDtoList) {
+    public ResponseEntity<Void> deleteClientList(@RequestBody List<ClientDto> clientDtoList) {
         if(Objects.nonNull(clientDtoList)) {
             final List<Client> clientList = ClientMapper.INSTANCE.clientDtoListToClientList(clientDtoList);
-            removeClientListUseCase.execute(clientList);
+            deleteClientListUseCase.execute(clientList);
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.notFound().build();

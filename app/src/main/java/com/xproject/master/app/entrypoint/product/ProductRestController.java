@@ -22,8 +22,8 @@ public class ProductRestController {
     private FindProductByIdUseCase findClientByIdUseCase;
     private CreateProductUseCase createProductUseCase;
     private CreateProductListUseCase createProductListUseCase;
-    private RemoveProductByIdUseCase removeProductByIdUseCase;
-    private RemoveProductListUseCase removeClientListUseCase;
+    private DeleteProductByIdUseCase deleteProductByIdUseCase;
+    private DeleteProductListUseCase deleteClientListUseCase;
 
     @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity findIndex() {
@@ -70,19 +70,19 @@ public class ProductRestController {
     }
 
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ProductDto> removeProductById(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteProductById(@PathVariable Long id) {
         if(Objects.nonNull(id)) {
-            removeProductByIdUseCase.execute(id);
+            deleteProductByIdUseCase.execute(id);
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping(value = "list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity removeProductList(@RequestBody List<ProductDto> productDtoList) {
+    public ResponseEntity<Void> deleteProductList(@RequestBody List<ProductDto> productDtoList) {
         if(Objects.nonNull(productDtoList)) {
             final List<Product> productList = ProductMapper.INSTANCE.productDtoListToProductList(productDtoList);
-            removeClientListUseCase.execute(productList);
+            deleteClientListUseCase.execute(productList);
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.notFound().build();

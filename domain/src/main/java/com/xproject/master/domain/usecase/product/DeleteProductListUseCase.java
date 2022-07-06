@@ -4,6 +4,6 @@ import com.xproject.master.domain.entity.product.Product;
 
 import java.util.List;
 
-public interface RemoveProductListUseCase {
+public interface DeleteProductListUseCase {
     void execute(List<Product> productList);
 }

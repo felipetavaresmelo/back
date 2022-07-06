@@ -1,5 +1,5 @@
 package com.xproject.master.domain.usecase.product;
 
-public interface RemoveProductByIdUseCase {
+public interface DeleteProductByIdUseCase {
     void execute(Long id);
 }

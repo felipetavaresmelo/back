@@ -3,7 +3,7 @@ package com.xproject.master.domain.usecase.product.impl;
 import com.xproject.master.domain.dataprovider.ProductDataProvider;
 import com.xproject.master.domain.entity.product.Product;
 import com.xproject.master.domain.usecase.product.FindProductByIdUseCase;
-import com.xproject.master.domain.usecase.product.RemoveProductByIdUseCase;
+import com.xproject.master.domain.usecase.product.DeleteProductByIdUseCase;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -11,7 +11,7 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 
 @Named
-public class RemoveProductByIdUseCaseImpl implements RemoveProductByIdUseCase {
+public class DeleteProductByIdUseCaseImpl implements DeleteProductByIdUseCase {
 
     @Inject
     private ProductDataProvider productDataProvider;
