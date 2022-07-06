@@ -7,6 +7,7 @@ import com.xproject.master.domain.usecase.product.CreateProductListUseCase;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
+import java.util.Objects;
 
 @Named
 public class CreateProductListUseCaseImpl implements CreateProductListUseCase {
@@ -17,7 +18,9 @@ public class CreateProductListUseCaseImpl implements CreateProductListUseCase {
     @Override
     public List<Product> execute(List<Product> productList) {
         for(Product prod: productList){
-            prod.setId(null);
+            if(Objects.nonNull(prod) && Objects.nonNull(prod.getId())){
+                throw new IllegalArgumentException("Id should not filled.");
+            }
         }
         return productDataProvider.saveProductList(productList);
     }

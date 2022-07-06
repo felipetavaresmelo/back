@@ -6,6 +6,7 @@ import com.xproject.master.domain.usecase.client.CreateClientUseCase;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.Objects;
 
 @Named
 public class CreateClientUseCaseImpl implements CreateClientUseCase {
@@ -15,7 +16,10 @@ public class CreateClientUseCaseImpl implements CreateClientUseCase {
 
     @Override
     public Client execute(Client client) {
-        client.setId(null);
+        if(Objects.nonNull(client) && Objects.nonNull(client.getId())){
+            throw new IllegalArgumentException("Id should not filled.");
+        }
         return clientDataProvider.saveClient(client);
+
     }
 }

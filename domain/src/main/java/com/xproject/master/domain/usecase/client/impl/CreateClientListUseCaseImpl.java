@@ -7,6 +7,7 @@ import com.xproject.master.domain.usecase.client.CreateClientListUseCase;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
+import java.util.Objects;
 
 @Named
 public class CreateClientListUseCaseImpl implements CreateClientListUseCase {
@@ -17,7 +18,9 @@ public class CreateClientListUseCaseImpl implements CreateClientListUseCase {
     @Override
     public List<Client> execute(List<Client> clientList) {
         for(Client cli : clientList){
-            cli.setId(null);
+            if(Objects.nonNull(cli) && Objects.nonNull(cli.getId())){
+                throw new IllegalArgumentException("Id should not filled.");
+            }
         }
         return clientDataProvider.saveClientList(clientList);
     }
