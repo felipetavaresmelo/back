@@ -3,7 +3,7 @@ package com.xproject.master.domain.usecase.client.impl;
 import com.xproject.master.domain.dataprovider.ClientDataProvider;
 import com.xproject.master.domain.entity.client.Client;
 import com.xproject.master.domain.usecase.client.FindClientByIdUseCase;
-import com.xproject.master.domain.usecase.client.RemoveClientByIdUseCase;
+import com.xproject.master.domain.usecase.client.DeleteClientByIdUseCase;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -11,7 +11,7 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 
 @Named
-public class RemoveClientByIdUseCaseImpl implements RemoveClientByIdUseCase {
+public class DeleteClientByIdUseCaseImpl implements DeleteClientByIdUseCase {
 
     @Inject
     private ClientDataProvider clientDataProvider;

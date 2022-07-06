@@ -11,8 +11,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -59,7 +57,7 @@ public interface ClientController extends ApiInfo {
     ResponseEntity<ClientDto> findClientById(Long id);
 
     ResponseEntity<List<ClientDto>> findClientAll();
-    ResponseEntity<ClientDto> saveClient(ClientDto clientDTO);
-    ResponseEntity<List<ClientDto>> saveClientList(List<ClientDto> clientDtoList);
+    ResponseEntity<ClientDto> createClient(ClientDto clientDTO);
+    ResponseEntity<List<ClientDto>> createClientList(List<ClientDto> clientDtoList);
     ResponseEntity<ClientDto> updateClient(Long id, ClientDto clientDTO);
 }

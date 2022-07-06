@@ -4,6 +4,6 @@ import com.xproject.master.domain.entity.client.Client;
 
 import java.util.List;
 
-public interface RemoveClientListUseCase {
-    void execute(List<Client> client);
+public interface CreateClientListUseCase {
+    List<Client> execute(List<Client> clientList);
 }
