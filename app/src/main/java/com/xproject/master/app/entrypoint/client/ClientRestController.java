@@ -26,11 +26,6 @@ public class ClientRestController implements ClientController {
     private DeleteClientByIdUseCase deleteClientByIdUseCase;
     private DeleteClientListUseCase deleteClientListUseCase;
 
-    @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ClientDto> findIndex() {
-        return ResponseEntity.notFound().build();
-    }
-
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ClientDto> findClientById(@PathVariable Long id) {
         if(Objects.nonNull(id)) {

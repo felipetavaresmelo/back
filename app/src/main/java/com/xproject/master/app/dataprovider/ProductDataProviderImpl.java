@@ -61,4 +61,5 @@ public class ProductDataProviderImpl implements ProductDataProvider {
         final List<ProductPo> productPoList = ProductMapper.INSTANCE.productListToProductPoList(productList);
         repository.deleteAll(productPoList);
     }
+
 }

@@ -16,7 +16,7 @@ import java.util.Objects;
 @RestController
 @RequestMapping(value = "product")
 @AllArgsConstructor
-public class ProductRestController {
+public class ProductRestController implements ProductController {
 
     private FindProductAllUseCase findProductAllUseCase;
     private FindProductByIdUseCase findClientByIdUseCase;
@@ -24,11 +24,7 @@ public class ProductRestController {
     private CreateProductListUseCase createProductListUseCase;
     private DeleteProductByIdUseCase deleteProductByIdUseCase;
     private DeleteProductListUseCase deleteClientListUseCase;
-
-    @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity findIndex() {
-        return ResponseEntity.notFound().build();
-    }
+    private UpdateProductUseCase updateProductUseCase;
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ProductDto> findProductById(@PathVariable Long id) {
@@ -47,7 +43,7 @@ public class ProductRestController {
         return ResponseEntity.ok().body(productDtoList);
     }
 
-    @PutMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDTO) {
         if(Objects.nonNull(productDTO)) {
             final Product product = ProductMapper.INSTANCE.productDtoToProduct(productDTO);
@@ -58,7 +54,7 @@ public class ProductRestController {
         return ResponseEntity.notFound().build();
     }
 
-    @PutMapping(value = "list", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "list", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ProductDto>> createProductList(@RequestBody List<ProductDto> productDtoList) {
         if(Objects.nonNull(productDtoList)) {
             final List<Product> productList = ProductMapper.INSTANCE.productDtoListToProductList(productDtoList);
@@ -86,5 +82,15 @@ public class ProductRestController {
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.notFound().build();
+    }
+    @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ProductDto> updateProduct(@PathVariable Long id, @RequestBody ProductDto productDTO){
+       if(Objects.nonNull(productDTO)){
+           final Product product = ProductMapper.INSTANCE.productDtoToProduct(productDTO);
+           final Product productResponse = updateProductUseCase.execute(id, product);
+           final ProductDto productDtoResponse = ProductMapper.INSTANCE.productToProductDto(productResponse);
+           return ResponseEntity.ok().body(productDtoResponse);
+       }
+       return ResponseEntity.notFound().build();
     }
 }

@@ -21,9 +21,12 @@ public class UpdateClientUseCaseImpl implements UpdateClientUseCase {
 
     @Override
     public Client execute(Long id, Client client) {
-        final Client clientObj = findClientByIdUseCase.execute(id);
-        if(Objects.nonNull(clientObj) && Objects.nonNull(clientObj.getId())) {
-            return clientDataProvider.updateClient(id, client);
+        if(Objects.isNull(client.getId()) || (!id.equals(client.getId()))){
+            throw new NoSuchElementException("Invalid Id.");
+        }
+        final Client clientFound = findClientByIdUseCase.execute(id);
+        if(Objects.nonNull(clientFound) && Objects.nonNull(clientFound.getId())) {
+            return clientDataProvider.saveClient(client);
         } else {
             throw new NoSuchElementException("Find client by id not found");
         }
