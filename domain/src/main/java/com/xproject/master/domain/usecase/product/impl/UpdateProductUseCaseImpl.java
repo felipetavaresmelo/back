@@ -24,8 +24,8 @@ public class UpdateProductUseCaseImpl implements UpdateProductUseCase {
         if(Objects.isNull(product.getId()) || (!id.equals(product.getId()))){
             throw new NoSuchElementException("Invalid Id.");
         }
-        final Product productObj = findProductByIdUseCase.execute(id);
-        if(Objects.nonNull(productObj) && Objects.nonNull(productObj.getId())){
+        final Product productFound = findProductByIdUseCase.execute(id);
+        if(Objects.nonNull(productFound) && Objects.nonNull(productFound.getId())){
             return productDataProvider.saveProduct(product);
         }else{
             throw new NoSuchElementException("Find product by id not found");
