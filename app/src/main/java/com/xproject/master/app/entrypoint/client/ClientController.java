@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -33,10 +34,10 @@ public interface ClientController extends ApiInfo {
                                             @ExampleObject(
                                                     name = "Cenário Sucesso",
                                                     value = "{\n" +
-                                                            "\"id\": \"1L\"\n" +
-                                                            "\"name\": \"teste\"\n" +
-                                                            "\"phone\": \"81999999999\"\n" +
-                                                            "}\n"
+                                                            "  \"id\": 2,\n" +
+                                                            "  \"name\": \"Joao\",\n" +
+                                                            "  \"phone\": \"1230982\"\n" +
+                                                            "}"
                                             )
                                     })
                     ),
@@ -56,8 +57,124 @@ public interface ClientController extends ApiInfo {
     )
     ResponseEntity<ClientDto> findClientById(Long id);
 
+    @Operation(summary = "Busca de todos os clientes",
+            parameters = {},
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200", description = "Sucesso",
+                            content = @Content(
+                                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    examples = {
+                                            @ExampleObject(
+                                                    name = "Cenário Sucesso",
+                                                    value =
+                                                            "[\n" +
+                                                                    "  {\n" +
+                                                                    "    \"id\": 2,\n" +
+                                                                    "    \"name\": \"Joao\",\n" +
+                                                                    "    \"phone\": \"120398123\"\n" +
+                                                                    "  },{\n" +
+                                                                    "    \"id\": 3,\n" +
+                                                                    "    \"name\": \"Maria\",\n" +
+                                                                    "    \"phone\": \"120398123\"\n" +
+                                                                    "  }\n" +
+                                                                    "]"
+                                            )
+                                    })
+                    ),
+                    @ApiResponse(responseCode = "408", description = "Quando uma requisição interna falha devido a timeout",
+                            content = @Content(
+                                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    schema = @Schema(implementation = ClientDto.class))),
+                    @ApiResponse(responseCode = "500", description = "Quando acontece um erro interno",
+                            content = @Content(
+                                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    schema = @Schema(implementation = ClientDto.class))),
+                    @ApiResponse(responseCode = "502", description = "Quando alguma requisição retorna null",
+                            content = @Content(
+                                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    schema = @Schema(implementation = ClientDto.class)))
+            }
+    )
     ResponseEntity<List<ClientDto>> findClientAll();
+
+    @Operation(summary = "Salva um novo cliente.",
+
+            responses = {
+                    @ApiResponse(
+                            responseCode = "201", description = "Sucesso",
+                            content = @Content(
+                                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    examples = {
+                                            @ExampleObject(
+                                                    name = "Cenário Sucesso",
+                                                    value = "{\n" +
+                                                            "  \"id\": 2,\n" +
+                                                            "  \"name\": \"Joao\",\n" +
+                                                            "  \"phone\": \"1230982\"\n" +
+                                                            "}"
+                                            )
+                                    })
+                    ),
+                    @ApiResponse(responseCode = "408", description = "Quando uma requisição interna falha devido a timeout",
+                            content = @Content(
+                                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    schema = @Schema(implementation = ClientDto.class))),
+                    @ApiResponse(responseCode = "500", description = "Quando acontece um erro interno",
+                            content = @Content(
+                                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    schema = @Schema(implementation = ClientDto.class))),
+                    @ApiResponse(responseCode = "502", description = "Quando alguma requisição retorna null",
+                            content = @Content(
+                                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    schema = @Schema(implementation = ClientDto.class)))
+            }
+    )
     ResponseEntity<ClientDto> createClient(ClientDto clientDTO);
+
+    @Operation(summary = "Salva uma lista de novos clientes.",
+
+            responses = {
+                    @ApiResponse(
+                            responseCode = "201", description = "Sucesso",
+                            content = @Content(
+                                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    examples = {
+                                            @ExampleObject(
+                                                    name = "Cenário Sucesso",
+                                                    value =
+                                                            "[\n" +
+                                                                    "  {\n" +
+                                                                    "    \"id\": 2,\n" +
+                                                                    "    \"name\": \"Joao\",\n" +
+                                                                    "    \"phone\": \"120398123\"\n" +
+                                                                    "  },{\n" +
+                                                                    "    \"id\": 3,\n" +
+                                                                    "    \"name\": \"Maria\",\n" +
+                                                                    "    \"phone\": \"120398123\"\n" +
+                                                                    "  }\n" +
+                                                                    "]"
+                                            )
+                                    })
+                    ),
+                    @ApiResponse(responseCode = "408", description = "Quando uma requisição interna falha devido a timeout",
+                            content = @Content(
+                                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    schema = @Schema(implementation = ClientDto.class))),
+                    @ApiResponse(responseCode = "500", description = "Quando acontece um erro interno",
+                            content = @Content(
+                                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    schema = @Schema(implementation = ClientDto.class))),
+                    @ApiResponse(responseCode = "502", description = "Quando alguma requisição retorna null",
+                            content = @Content(
+                                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    schema = @Schema(implementation = ClientDto.class)))
+            }
+    )
+
     ResponseEntity<List<ClientDto>> createClientList(List<ClientDto> clientDtoList);
+
     ResponseEntity<ClientDto> updateClient(Long id, ClientDto clientDTO);
+    ResponseEntity<Void> deleteClientById(Long id);
+    ResponseEntity<Void> deleteClientList(List<ClientDto> clientDtoList);
 }

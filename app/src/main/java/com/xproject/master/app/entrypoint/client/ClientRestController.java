@@ -66,7 +66,7 @@ public class ClientRestController implements ClientController {
     }
 
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ClientDto> deleteClientById(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteClientById(@PathVariable Long id) {
         if(Objects.nonNull(id)) {
             deleteClientByIdUseCase.execute(id);
             return ResponseEntity.ok().build();
