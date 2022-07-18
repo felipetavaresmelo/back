@@ -1,6 +1,5 @@
 package com.xproject.master.app.entrypoint.product;
 
-import com.xproject.master.app.dto.ClientDto;
 import com.xproject.master.app.dto.ProductDto;
 import com.xproject.master.app.entrypoint.ApiInfo;
 import io.swagger.v3.oas.annotations.Operation;
@@ -62,7 +61,7 @@ public interface ProductController extends ApiInfo {
     )
     ResponseEntity<ProductDto> findProductById(Long id);
     @Operation(summary = "Busca de todos os produtos",
-            parameters = {},
+
             responses = {
                     @ApiResponse(
                             responseCode = "200", description = "Sucesso",
@@ -223,15 +222,15 @@ public interface ProductController extends ApiInfo {
                     @ApiResponse(responseCode = "408", description = "Quando uma requisição interna falha devido a timeout",
                             content = @Content(
                                     mediaType = MediaType.APPLICATION_JSON_VALUE,
-                                    schema = @Schema(implementation = ClientDto.class))),
+                                    schema = @Schema(implementation = ProductDto.class))),
                     @ApiResponse(responseCode = "500", description = "Quando acontece um erro interno",
                             content = @Content(
                                     mediaType = MediaType.APPLICATION_JSON_VALUE,
-                                    schema = @Schema(implementation = ClientDto.class))),
+                                    schema = @Schema(implementation = ProductDto.class))),
                     @ApiResponse(responseCode = "502", description = "Quando alguma requisição retorna null",
                             content = @Content(
                                     mediaType = MediaType.APPLICATION_JSON_VALUE,
-                                    schema = @Schema(implementation = ClientDto.class)))
+                                    schema = @Schema(implementation = ProductDto.class)))
             }
     )
     ResponseEntity<ProductDto> updateProduct(Long id, ProductDto productDTO);

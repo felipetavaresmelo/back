@@ -11,7 +11,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -58,7 +57,7 @@ public interface ClientController extends ApiInfo {
     ResponseEntity<ClientDto> findClientById(Long id);
 
     @Operation(summary = "Busca de todos os clientes",
-            parameters = {},
+
             responses = {
                     @ApiResponse(
                             responseCode = "200", description = "Sucesso",
