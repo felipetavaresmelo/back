@@ -190,6 +190,7 @@ public interface ClientController extends ApiInfo {
                                             @ExampleObject(
                                                     name = "Cenário Sucesso",
                                                     value = "{\n" +
+                                                            "  \"id\": 2,\n" +
                                                             "  \"name\": \"Joao\",\n" +
                                                             "  \"phone\": \"1230982\"\n" +
                                                             "}"
