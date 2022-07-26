@@ -45,3 +45,11 @@ Após login no pgAdmin, seguir os passos abaixo:
 
 ## Subir a aplicação
 
+ app > src > main > java > Application.java > Run 'Application main()'
+
+---
+
+## Swagger UI
+
+[Swagger UI da Aplicação](http://localhost:8080/swagger-ui/index.html)
+
