@@ -5,6 +5,8 @@ import com.xproject.master.domain.entity.product.Product;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.NoSuchElementException;
+import java.util.Objects;
 
 @Named
 public class FindProductByIdUseCaseImpl implements com.xproject.master.domain.usecase.product.FindProductByIdUseCase {
@@ -14,6 +16,11 @@ public class FindProductByIdUseCaseImpl implements com.xproject.master.domain.us
 
     @Override
     public Product execute(Long id) {
-        return productDataProvider.findProductById(id);
+        final Product productFound = productDataProvider.findProductById(id);
+        if(Objects.nonNull(productFound) && Objects.nonNull(productFound.getId())){
+            return productFound;
+        }else{
+            throw new NoSuchElementException("Product not found!");
+        }
     }
 }
