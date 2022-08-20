@@ -1,4 +1,4 @@
-version: '3'
+version: '3.9'
 
 services:
 
@@ -7,7 +7,7 @@ services:
         image: postgres
         restart: always
         ports:
-            - "5432:5432"
+            - 5432:5432
         volumes:
             - dbdata:/data/pgdb
         environment:
@@ -22,32 +22,36 @@ services:
             PGADMIN_DEFAULT_EMAIL: admin@admin.com
             PGADMIN_DEFAULT_PASSWORD: root
         ports:
-            - "5050:80"
+            - 5050:80
 
     mongo:
-        container_name: mongo
-        image: mongo:4.4.4
+        image: mongo
         restart: always
         ports:
             - 27017:27017
         volumes:
             - dbdata:/data/mongodb
-#            - dbdata:/docker-entrypoint-initdb.d
+            - dbdata:/docker-entrypoint-initdb.d
         environment:
-            MONGO_INITDB_DATABASE: masterdb
+            MONGO_INITDB_DATABASE: xprojectdb
+            MONGO_INITDB_ROOT_USERNAME: root
+            MONGO_INITDB_ROOT_PASSWORD: MongoExpress
+        networks:
+            -
 
     mongo-express:
-        container_name: mongo-express
         image: mongo-express
         restart: always
         depends_on:
             - mongo
         ports:
-            - 9081:8081
-        volumes:
-            - dbdata:/data/db
+            - 8081:8081
         environment:
-            - ME_CONFIG_MONGODB_SERVER=mongo_dev
+            ME_CONFIG_BASICAUTH_USERNAME: defaultuser
+            ME_CONFIG_BASICAUTH_PASSWORD: MongoExpress
+            ME_CONFIG_MONGODB_PORT: 27017
+            ME_CONFIG_MONGODB_ADMINUSERNAME: root
+            ME_CONFIG_MONGODB_ADMINPASSWORD: MongoExpress
 
     redis:
         container_name: redis
@@ -56,7 +60,7 @@ services:
         restart: always
         command: redis-server
         ports:
-            - "6379:6379"
+            - 6379:6379
 
     redis-commander:
         container_name: redis-commander
@@ -66,7 +70,11 @@ services:
         environment:
             - REDIS_HOSTS=local:redis:6379
         ports:
-            - "8081:8081"
+            - 8082:8082
 
 volumes:
     dbdata:
+
+networks:
+    default:
+        driver: custom-driver-1

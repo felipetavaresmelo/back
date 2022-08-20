@@ -1,10 +1,17 @@
 # X Project
 
-## Ambiente
+## Preparando ambiente de desenvolvimento
+
+---
+
+### Pre-requisitos:
+
+ - Docker instalado.
+ - Docker Compose instalado.
 
 ---
 ### Docker Compose
-Executar o comando abaixo a partir da pasta *./app/docker/local/*
+Executar o comando abaixo a partir da pasta *./app/docker/local/*, se necessário utilizar super usuário.
 
     docker-compose up -d
 
