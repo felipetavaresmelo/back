@@ -85,3 +85,22 @@ Após login no pgAdmin, seguir os passos abaixo:
 
 [Swagger UI da Aplicação](http://localhost:8080/swagger-ui/index.html)
 
+---
+
+## Fluxo de desenvolvimento
+
+### Git Flow
+
+Instalar o gitflow:
+
+```shell
+apt-get install git-flow
+```
+
+Iniciar o fluxo no repositório local:
+
+```shell
+git flow init
+```
+
+Instalar a extenssão do intellij que facilita o fluxo de trabalho do gitflow: https://plugins.jetbrains.com/plugin/18320-git-flow-integration-plus
