@@ -20,16 +20,11 @@ public class ClientRestController implements ClientController {
 
     private FindClientAllUseCase findClientAllUseCase;
     private FindClientByIdUseCase findClientByIdUseCase;
-    private SaveClientUseCase saveClientUseCase;
+    private CreateClientUseCase createClientUseCase;
     private UpdateClientUseCase updateClientUseCase;
-    private SaveClientListUseCase saveClientListUseCase;
-    private RemoveClientByIdUseCase removeClientByIdUseCase;
-    private RemoveClientListUseCase removeClientListUseCase;
-
-    @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ClientDto> findIndex() {
-        return ResponseEntity.notFound().build();
-    }
+    private CreateClientListUseCase createClientListUseCase;
+    private DeleteClientByIdUseCase deleteClientByIdUseCase;
+    private DeleteClientListUseCase deleteClientListUseCase;
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ClientDto> findClientById(@PathVariable Long id) {
@@ -49,10 +44,10 @@ public class ClientRestController implements ClientController {
     }
 
     @PostMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ClientDto> saveClient(@RequestBody ClientDto clientDTO) {
+    public ResponseEntity<ClientDto> createClient(@RequestBody ClientDto clientDTO) {
         if(Objects.nonNull(clientDTO)) {
             final Client client = ClientMapper.INSTANCE.clientDtoToClient(clientDTO);
-            final Client clientResponse = saveClientUseCase.execute(client);
+            final Client clientResponse = createClientUseCase.execute(client);
             final ClientDto clientDtoResponse = ClientMapper.INSTANCE.clientToClientDto(clientResponse);
             return ResponseEntity.created(URI.create("/client/" + clientDtoResponse.getId())).body(clientDtoResponse);
         }
@@ -60,10 +55,10 @@ public class ClientRestController implements ClientController {
     }
 
     @PostMapping(value = "list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<ClientDto>> saveClientList(@RequestBody List<ClientDto> clientDtoList) {
+    public ResponseEntity<List<ClientDto>> createClientList(@RequestBody List<ClientDto> clientDtoList) {
         if(Objects.nonNull(clientDtoList)) {
             final List<Client> clientList = ClientMapper.INSTANCE.clientDtoListToClientList(clientDtoList);
-            final List<Client> clientListResponse = saveClientListUseCase.execute(clientList);
+            final List<Client> clientListResponse = createClientListUseCase.execute(clientList);
             final List<ClientDto> clientDtoListResponse = ClientMapper.INSTANCE.clientListToClientDtoList(clientListResponse);
             return ResponseEntity.created(URI.create("/client/list")).body(clientDtoListResponse);
         }
@@ -71,19 +66,19 @@ public class ClientRestController implements ClientController {
     }
 
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ClientDto> removeClientById(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteClientById(@PathVariable Long id) {
         if(Objects.nonNull(id)) {
-            removeClientByIdUseCase.execute(id);
+            deleteClientByIdUseCase.execute(id);
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping(value = "list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity removeClientList(@RequestBody List<ClientDto> clientDtoList) {
+    public ResponseEntity<Void> deleteClientList(@RequestBody List<ClientDto> clientDtoList) {
         if(Objects.nonNull(clientDtoList)) {
             final List<Client> clientList = ClientMapper.INSTANCE.clientDtoListToClientList(clientDtoList);
-            removeClientListUseCase.execute(clientList);
+            deleteClientListUseCase.execute(clientList);
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.notFound().build();

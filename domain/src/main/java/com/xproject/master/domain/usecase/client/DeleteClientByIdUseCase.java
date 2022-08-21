@@ -1,5 +1,5 @@
 package com.xproject.master.domain.usecase.client;
 
-public interface RemoveClientByIdUseCase {
+public interface DeleteClientByIdUseCase {
     void execute(Long id);
 }

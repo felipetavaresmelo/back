@@ -39,15 +39,15 @@ public class ProductDataProviderImpl implements ProductDataProvider {
 
     @Override
     public Product saveProduct (Product product) {
-        final ProductPo productPoListIn = ProductMapper.INSTANCE.productToProductPo(product);
-        final ProductPo productPoListOut = repository.save(productPoListIn);
-        return ProductMapper.INSTANCE.productPoToProduct(productPoListOut);
+        final ProductPo productPoIn = ProductMapper.INSTANCE.productToProductPo(product);
+        final ProductPo productPoOut = repository.save(productPoIn);
+        return ProductMapper.INSTANCE.productPoToProduct(productPoOut);
     }
 
     @Override
     public List<Product> saveProductList (List<Product> productList) {
-        final List<ProductPo> producPOListIn = ProductMapper.INSTANCE.productListToProductPoList(productList);
-        final List<ProductPo> productPoListOut = repository.saveAll(producPOListIn);
+        final List<ProductPo> productPOListIn = ProductMapper.INSTANCE.productListToProductPoList(productList);
+        final List<ProductPo> productPoListOut = repository.saveAll(productPOListIn);
         return ProductMapper.INSTANCE.productPoListToProductList(productPoListOut);
     }
 
@@ -61,4 +61,5 @@ public class ProductDataProviderImpl implements ProductDataProvider {
         final List<ProductPo> productPoList = ProductMapper.INSTANCE.productListToProductPoList(productList);
         repository.deleteAll(productPoList);
     }
+
 }
