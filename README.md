@@ -11,6 +11,11 @@ Executar o comando abaixo a partir da pasta *./app/docker/local/*
 Ou levantar os serviços através do plugin: https://plugins.jetbrains.com/plugin/7724-docker
 
 ---
+#### [H2](https://h2database.com/html/main.html)
+
+- Abrir interface web: http://localhost:8080/h2-console
+  - Database: jdbc:h2:mem:testdb
+
 #### [Mongo Express](https://github.com/mongo-express/mongo-express)
 - Abrir interface web: http://localhost:9081
 
