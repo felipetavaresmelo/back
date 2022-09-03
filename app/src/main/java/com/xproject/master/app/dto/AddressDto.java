@@ -1,13 +1,14 @@
-package com.xproject.master.domain.entity.adreess;
+package com.xproject.master.app.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Adreess {
+public class AddressDto {
       private String cep;
       private String street;
       private String district;
