@@ -23,6 +23,7 @@ public class ClientDataProviderImpl implements ClientDataProvider {
         return ClientMapper.INSTANCE.clientPOtoClient(clientPoById);
     }
 
+    @Override
     public List<Client> findClientListByIdList (List<Long> idList) {
         final List<ClientPo> clientPoListById = repository.findAllById(idList);
         return ClientMapper.INSTANCE.clientPOListToClientList(clientPoListById);
