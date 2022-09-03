@@ -2,6 +2,7 @@ package com.xproject.master.app.config;
 
 import com.xproject.master.app.dataprovider.repository.ClientDataProviderImpl;
 import com.xproject.master.app.dataprovider.repository.ProductDataProviderImpl;
+import com.xproject.master.domain.entity.adreess.Address;
 import com.xproject.master.domain.entity.client.Client;
 import com.xproject.master.domain.entity.product.Product;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ public class TestConfig implements CommandLineRunner {
         Client client1 = new Client();
         client1.setName("Antonio Silva");
         client1.setPhone("988888888");
+        Address address1 = new Address();
+        address1.setCep("51020090");
+        client1.setAddress(address1);
         clientList.add(client1);
 
         Client client2 = new Client();
