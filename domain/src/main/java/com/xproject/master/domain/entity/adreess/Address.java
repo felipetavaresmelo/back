@@ -3,7 +3,6 @@ package com.xproject.master.domain.entity.adreess;
 import com.xproject.master.domain.usecase.adreess.ReadAddressByCep;
 import lombok.Data;
 
-import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -25,15 +24,13 @@ public class Address {
       private static final String STATE_PtBr = "Estado";
       private static final String COUNTRY_PtBr = "País";
 
-      @Inject
       private ReadAddressByCep readAddressByCep;
 
-      /*
-      public Address() {
-            readAddressByCep = new ReadAddressByCepImpl();
-      }
-       */
+      public Address () {}
 
+      public Address (ReadAddressByCep readAddressByCep){
+            this.readAddressByCep = readAddressByCep;
+      }
 
       public void setCep(String cep) {
             if (cep.isEmpty()){
@@ -43,17 +40,17 @@ public class Address {
 
             this.cep = cep;
 
-            Address address;
+            if(readAddressByCep != null) {
+                  ArrayList<String> addressNotFound = checkAddressNotFound();
+                  if (addressNotFound.size() > 0) {
+                        Address addressFound = this.readAddressByCep.execute(cep);
 
-            ArrayList<String> addressNotFound = checkAddressNotFound();
-            if(addressNotFound.size() > 0){
-                  address = this.readAddressByCep.execute(cep);
-
-                  this.street = addressNotFound.contains(Address.STREET_PtBr) ? address.getStreet() : this.street;
-                  this.district = addressNotFound.contains(Address.DISTRICT_PtBr) ? address.getDistrict() : this.district;
-                  this.city = addressNotFound.contains(Address.CITY_PtBr) ? address.getCity() : this.city;
-                  this.state = addressNotFound.contains(Address.STATE_PtBr) ? address.getState() : this.state;
-                  this.country = addressNotFound.contains(Address.COUNTRY_PtBr) ? address.getCountry() : this.country;
+                        this.street = addressNotFound.contains(Address.STREET_PtBr) ? addressFound.getStreet() : this.street;
+                        this.district = addressNotFound.contains(Address.DISTRICT_PtBr) ? addressFound.getDistrict() : this.district;
+                        this.city = addressNotFound.contains(Address.CITY_PtBr) ? addressFound.getCity() : this.city;
+                        this.state = addressNotFound.contains(Address.STATE_PtBr) ? addressFound.getState() : this.state;
+                        this.country = addressNotFound.contains(Address.COUNTRY_PtBr) ? addressFound.getCountry() : this.country;
+                  }
             }
       }
 

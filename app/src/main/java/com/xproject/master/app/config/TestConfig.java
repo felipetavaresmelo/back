@@ -5,6 +5,7 @@ import com.xproject.master.app.dataprovider.repository.ProductDataProviderImpl;
 import com.xproject.master.domain.entity.adreess.Address;
 import com.xproject.master.domain.entity.client.Client;
 import com.xproject.master.domain.entity.product.Product;
+import com.xproject.master.domain.usecase.adreess.ReadAddressByCep;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +24,9 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private ProductDataProviderImpl productDataProvider;
 
+    @Autowired
+    private ReadAddressByCep readAddressByCep;
+
     @Override
     public void run(String... args) {
 
@@ -31,7 +35,7 @@ public class TestConfig implements CommandLineRunner {
         Client client1 = new Client();
         client1.setName("Antonio Silva");
         client1.setPhone("988888888");
-        Address address1 = new Address();
+        Address address1 = new Address(readAddressByCep);
         address1.setCep("51020090");
         client1.setAddress(address1);
         clientList.add(client1);
