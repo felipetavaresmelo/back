@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import java.text.MessageFormat;
-import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 @ControllerAdvice

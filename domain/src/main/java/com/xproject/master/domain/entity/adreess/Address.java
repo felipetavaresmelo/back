@@ -1,6 +1,6 @@
 package com.xproject.master.domain.entity.adreess;
 
-import com.xproject.master.domain.usecase.adreess.ReadAddressByCep;
+import com.xproject.master.domain.usecase.adreess.ReadAddressByCepUseCase;
 import lombok.Data;
 
 import javax.inject.Named;
@@ -24,12 +24,12 @@ public class Address {
       private static final String STATE_PtBr = "Estado";
       private static final String COUNTRY_PtBr = "País";
 
-      private ReadAddressByCep readAddressByCep;
+      private ReadAddressByCepUseCase readAddressByCepUseCase;
 
       public Address () {}
 
-      public Address (ReadAddressByCep readAddressByCep){
-            this.readAddressByCep = readAddressByCep;
+      public Address (ReadAddressByCepUseCase readAddressByCepUseCase){
+            this.readAddressByCepUseCase = readAddressByCepUseCase;
       }
 
       public void setCep(String cep) {
@@ -40,10 +40,10 @@ public class Address {
 
             this.cep = cep;
 
-            if(readAddressByCep != null) {
+            if(readAddressByCepUseCase != null) {
                   ArrayList<String> addressNotFound = checkAddressNotFound();
                   if (addressNotFound.size() > 0) {
-                        Address addressFound = this.readAddressByCep.execute(cep);
+                        Address addressFound = this.readAddressByCepUseCase.execute(cep);
 
                         this.street = addressNotFound.contains(Address.STREET_PtBr) ? addressFound.getStreet() : this.street;
                         this.district = addressNotFound.contains(Address.DISTRICT_PtBr) ? addressFound.getDistrict() : this.district;

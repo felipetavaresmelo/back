@@ -1,6 +1,8 @@
 package com.xproject.master.app.dataprovider.repository.jpa.po;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
