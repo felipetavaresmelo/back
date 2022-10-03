@@ -1,6 +1,6 @@
 package com.xproject.master.app.mappers;
 
-import com.xproject.master.app.dataprovider.jpa.po.ClientPo;
+import com.xproject.master.app.dataprovider.repository.jpa.po.ClientPo;
 import com.xproject.master.app.dto.ClientDto;
 import com.xproject.master.domain.entity.client.Client;
 import org.mapstruct.Mapper;

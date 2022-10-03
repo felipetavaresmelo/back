@@ -1,7 +1,7 @@
-package com.xproject.master.app.dataprovider;
+package com.xproject.master.app.dataprovider.repository;
 
-import com.xproject.master.app.dataprovider.jpa.ClientJpaRepository;
-import com.xproject.master.app.dataprovider.jpa.po.ClientPo;
+import com.xproject.master.app.dataprovider.repository.jpa.ClientJpaRepository;
+import com.xproject.master.app.dataprovider.repository.jpa.po.ClientPo;
 import com.xproject.master.app.mappers.ClientMapper;
 import com.xproject.master.domain.dataprovider.ClientDataProvider;
 import com.xproject.master.domain.entity.client.Client;
@@ -23,6 +23,7 @@ public class ClientDataProviderImpl implements ClientDataProvider {
         return ClientMapper.INSTANCE.clientPOtoClient(clientPoById);
     }
 
+    @Override
     public List<Client> findClientListByIdList (List<Long> idList) {
         final List<ClientPo> clientPoListById = repository.findAllById(idList);
         return ClientMapper.INSTANCE.clientPOListToClientList(clientPoListById);

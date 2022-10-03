@@ -1,7 +1,7 @@
-package com.xproject.master.app.dataprovider;
+package com.xproject.master.app.dataprovider.repository;
 
-import com.xproject.master.app.dataprovider.jpa.ProductJpaRepository;
-import com.xproject.master.app.dataprovider.jpa.po.ProductPo;
+import com.xproject.master.app.dataprovider.repository.jpa.ProductJpaRepository;
+import com.xproject.master.app.dataprovider.repository.jpa.po.ProductPo;
 import com.xproject.master.app.mappers.ProductMapper;
 import com.xproject.master.domain.dataprovider.ProductDataProvider;
 import com.xproject.master.domain.entity.product.Product;

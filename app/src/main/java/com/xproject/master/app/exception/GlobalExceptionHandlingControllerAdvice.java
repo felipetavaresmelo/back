@@ -29,7 +29,7 @@ public class GlobalExceptionHandlingControllerAdvice {
         if (AnnotationUtils.findAnnotation(exception.getClass(), ResponseStatus.class) != null)
             return ResponseEntity.notFound().build();
 
-        logger.error(MessageFormat.format("Request: {0} raised {1}", req.getRequestURI(), exception));
+        logger.error(MessageFormat.format("Request: {0} | cause: {1} | raised: {2}", req.getRequestURI(), exception.toString(), exception.getStackTrace()[0]));
 
         return ResponseEntity.notFound().build();
     }
@@ -39,7 +39,7 @@ public class GlobalExceptionHandlingControllerAdvice {
         if (AnnotationUtils.findAnnotation(exception.getClass(), ResponseStatus.class) != null)
             return ResponseEntity.internalServerError().body(exception.toString());
 
-        logger.error(MessageFormat.format("Request: {0} raised {1}", req.getRequestURI(), exception));
+        logger.error(MessageFormat.format("Request: {0} | cause: {1} | raised: {2}", req.getRequestURI(), exception.toString(), exception.getStackTrace()[0]));
 
         return ResponseEntity.internalServerError().body(exception.toString());
     }
