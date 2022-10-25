@@ -2,4 +2,16 @@ spring:
   profiles:
     active: ${APP_PROFILE:test}
   jpa:
-    open-in-view=true:
+    open-in-view=true: true
+
+dataprovider:
+  cep:
+    url: "http://localhost:8888/"
+
+feign:
+  client:
+    config:
+      cep:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: BASIC
