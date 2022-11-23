@@ -91,7 +91,7 @@ public class ClientTestContainer {
         MockitoAnnotations.openMocks(this);
     }
     @Test
-    @DisplayName("When create client should return Status 201(Created)")
+    @DisplayName("Create should return Status 201(Created) and Client")
     void saveClientShouldReturnStatusCreatedWhenValidData() throws Exception{
 
         String jsonBody = objectMapper.writeValueAsString(clientDto1);
@@ -102,6 +102,56 @@ public class ClientTestContainer {
                         .accept(MediaType.APPLICATION_JSON));
         result.andExpect(status().isCreated())
             .andExpect(jsonPath("$.id").value(existingId2));
+    }
+    @Test
+    @DisplayName("Find should return Client And Status 200(Ok) when id exists")
+    void findByIdClientShouldReturnStatusOkWhenValidData() throws Exception{
+        ResultActions result =
+                mockMvc.perform(MockMvcRequestBuilders.get("/client/{$id}", existingId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON));
+        result.andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(existingId));
+    }
+    @Test
+    @DisplayName("Find should return NotFound 404 (Notfound) when id does not exists")
+    void findByIdClientShouldReturnNotFoundWhenIdDoesNotExists() throws Exception{
+        ResultActions result =
+                mockMvc.perform(MockMvcRequestBuilders.get("/client/{$id}", nonExistingId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON));
+        result.andExpect(status().isNotFound());
+    }
+
+    @Test
+    @DisplayName("Find All should return List And Status 200(Ok)")
+    void findAllClientShouldReturnStatusOkWhenValidData() throws Exception{
+
+        ResultActions result =
+                mockMvc.perform(MockMvcRequestBuilders.get("/client/all")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON));
+        result.andExpect(status().isOk());
+    }
+    @Test
+    @DisplayName("Delete should return Status 200 (Ok) When id exists")
+    void deleteClientShouldReturnStatusOkWhenIdExists() throws Exception{
+        ResultActions result =
+                mockMvc.perform(MockMvcRequestBuilders.delete("/client/{$id}", existingId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON));
+        result.andExpect(status().isOk());
+
+    }
+    @Test
+    @DisplayName("Delete should return NotFound when Id does not exists")
+    void deleteClientShouldReturnNotfoundWhenIdDoesNotExists() throws Exception{
+        ResultActions result =
+                mockMvc.perform(MockMvcRequestBuilders.delete("/client/{$id}", nonExistingId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON));
+        result.andExpect(status().isNotFound());
+
     }
 
 }
