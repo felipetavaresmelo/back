@@ -39,6 +39,7 @@
         <jakarta.xml.bind-api.version>2.3.2</jakarta.xml.bind-api.version>
         <spring.boot.maven.plugin>2.6.2</spring.boot.maven.plugin>
         <swagger-openapi-version>1.6.9</swagger-openapi-version>
+        <testcontainer-version>1.17.3</testcontainer-version>
 
     </properties>
 
@@ -114,6 +115,41 @@
             <artifactId>springdoc-openapi-ui</artifactId>
             <version>${swagger-openapi-version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>testcontainers</artifactId>
+            <version>${testcontainer-version}</version>
+            <!--			<scope>test</scope>-->
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${testcontainer-version}</version>
+            <!--			<scope>test</scope>-->
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${testcontainer-version}</version>
+<!--            <scope>test</scope>-->
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.12.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.12.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.12.1</version>
+        </dependency>
+
     </dependencies>
 
     <dependencyManagement>
