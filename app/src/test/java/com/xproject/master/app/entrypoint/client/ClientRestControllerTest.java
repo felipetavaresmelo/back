@@ -64,7 +64,7 @@ class ClientRestControllerTest {
     }
 
     @Test
-    @DisplayName("Quando consultar todos os clientes deve retornar com sucesso")
+    @DisplayName("When querying all clients need to return successfully.")
     void getClients() {
         ResponseEntity<List<ClientDto>> responseEntityClientDTOList = new ResponseEntity<>(
                 clientDtoList,
@@ -80,7 +80,7 @@ class ClientRestControllerTest {
     }
 
     @Test
-    @DisplayName("Quando consultar o cliente pelo ID deve retornar com sucesso")
+    @DisplayName("When querying the client by ID, it needs to return successfully.")
     void getClientById() {
 
         HttpHeaders header = new HttpHeaders();

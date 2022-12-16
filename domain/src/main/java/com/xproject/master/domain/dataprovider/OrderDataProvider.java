@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface OrderDataProvider {
 
-    void saveOrder (Order order);
+    Order saveOrder (Order order);
 
     Order findOrderById (Long id);
 

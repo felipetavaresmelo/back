@@ -12,5 +12,5 @@ public class Order {
 
     private Long id;
     private Client client;
-    private List<OrderItem> orderList;
+    private List<OrderItem> orderItemList;
 }
