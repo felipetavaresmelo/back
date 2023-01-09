@@ -3,14 +3,9 @@ package com.xproject.master.app.entrypoint.client;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xproject.master.app.dto.AddressDto;
 import com.xproject.master.app.dto.ClientDto;
-import com.xproject.master.domain.entity.client.Client;
-import com.xproject.master.domain.usecase.adreess.ReadAddressByCepUseCase;
-import com.xproject.master.domain.usecase.client.CreateClientUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -38,9 +33,6 @@ public class ClientTestContainer {
     private MockMvc mockMvc;
     @Autowired
     private ObjectMapper objectMapper;
-    private List<ClientDto> clientDtoList;
-    private Client client;
-    private List<Client> clientList;
     private Long existingId;
     private Long existingId2;
     private Long nonExistingId;
@@ -50,9 +42,8 @@ public class ClientTestContainer {
     @BeforeEach
     void setUp() {
         existingId = 1L;
-        existingId2 = 2L;
+        existingId2 = 5L;
         nonExistingId = 1000L;
-        clientDtoList = new ArrayList<>();
         clientDto1 = new ClientDto();
 
         clientDto1.setName("Antonio Silva");
@@ -66,19 +57,6 @@ public class ClientTestContainer {
         clientDto2.setName("Brown");
         clientDto2.setPhone("222222222");
         clientDto2.setAddress(address1);
-        clientDtoList.add(clientDto2);
-
-        clientList = new ArrayList<>();
-
-        client = new Client();
-        client.setName("Maria");
-        client.setPhone("111111111");
-        clientList.add(client);
-
-        Client client2 = new Client();
-        client2.setName("Brown");
-        client2.setPhone("222222222");
-        clientList.add(client2);
 
         MockitoAnnotations.openMocks(this);
     }
