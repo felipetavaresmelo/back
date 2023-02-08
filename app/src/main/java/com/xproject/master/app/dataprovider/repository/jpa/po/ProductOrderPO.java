@@ -4,7 +4,6 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
@@ -15,35 +14,28 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "product")
-public class ProductPo implements Serializable {
+public class ProductOrderPO {
 
-    private static final long serialVersionUID = 2L;
+    private static final long serialVersionUID = 3L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private Long id;
-    private String title;
-    private String subtitle;
-    private String categoryId;
-    private String warranty;
-    private String description;
-    private String condition;
-    private String globalPrice;
-    private String netWeight;
 
+    private String quantity;
+    private String unitPrice;
 
-    private Integer availableQuantity;
-    private Integer soldQuantity;
-    private Double originalPrice;
-    private Double price;
+    @ManyToOne
+    @JoinColumn(name = "item_id")
+    private ProductPo item;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        ProductPo productPo = (ProductPo) o;
-        return id != null && Objects.equals(id, productPo.id);
+        ProductOrderPO that = (ProductOrderPO) o;
+        return id != null && Objects.equals(id, that.id);
     }
 
     @Override
