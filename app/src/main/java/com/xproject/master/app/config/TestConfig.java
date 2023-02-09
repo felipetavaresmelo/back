@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
-@Profile("test")
+@Profile({"dev", "test"})
 public class TestConfig implements CommandLineRunner {
 
     @Autowired
