@@ -42,6 +42,11 @@ docker-compose up --build --force-recreate --renew-anon-volumes
 ```
 
 ---
+#### [H2](https://h2database.com/html/main.html)
+
+- Abrir interface web: http://localhost:8080/h2-console
+  - Database: jdbc:h2:mem:testdb
+
 #### [Mongo Express](https://github.com/mongo-express/mongo-express)
 - Abrir interface web: http://localhost:8081
 

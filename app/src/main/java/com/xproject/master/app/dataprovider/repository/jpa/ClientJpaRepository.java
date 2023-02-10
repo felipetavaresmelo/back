@@ -1,6 +1,6 @@
-package com.xproject.master.app.dataprovider.jpa;
+package com.xproject.master.app.dataprovider.repository.jpa;
 
-import com.xproject.master.app.dataprovider.jpa.po.ClientPo;
+import com.xproject.master.app.dataprovider.repository.jpa.po.ClientPo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

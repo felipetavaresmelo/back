@@ -1,16 +1,17 @@
-package com.xproject.master.app.dataprovider.jpa.po;
+package com.xproject.master.app.dataprovider.repository.jpa.po;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "CLIENT")
+@Table(name = "client")
 public class ClientPo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -20,4 +21,8 @@ public class ClientPo implements Serializable {
     private Long id;
     private String name;
     private String phone;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id")
+    private AddressPo address;
 }

@@ -196,7 +196,7 @@ public interface ProductController extends ApiInfo {
                             schema = @Schema(
                                     implementation = Integer.class
                             ),
-                            name = "id", description = "Id do cliente", required = true, in = ParameterIn.PATH),
+                            name = "id", description = "Id do produto", required = true, in = ParameterIn.PATH),
             },
             responses = {
                     @ApiResponse(

@@ -2,8 +2,8 @@ package com.xproject.master.domain.usecase.client.impl;
 
 import com.xproject.master.domain.dataprovider.ClientDataProvider;
 import com.xproject.master.domain.entity.client.Client;
-import com.xproject.master.domain.usecase.client.FindClientByIdUseCase;
 import com.xproject.master.domain.usecase.client.DeleteClientByIdUseCase;
+import com.xproject.master.domain.usecase.client.FindClientByIdUseCase;
 
 import javax.inject.Inject;
 import javax.inject.Named;

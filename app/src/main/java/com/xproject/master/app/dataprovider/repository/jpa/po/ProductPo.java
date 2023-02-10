@@ -1,13 +1,14 @@
-package com.xproject.master.app.dataprovider.jpa.po;
+package com.xproject.master.app.dataprovider.repository.jpa.po;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "product")

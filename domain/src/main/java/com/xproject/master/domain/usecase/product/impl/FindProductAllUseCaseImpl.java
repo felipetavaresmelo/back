@@ -2,7 +2,6 @@ package com.xproject.master.domain.usecase.product.impl;
 
 import com.xproject.master.domain.dataprovider.ProductDataProvider;
 import com.xproject.master.domain.entity.product.Product;
-import com.xproject.master.domain.usecase.client.FindClientAllUseCase;
 
 import javax.inject.Inject;
 import javax.inject.Named;

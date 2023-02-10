@@ -2,4 +2,4 @@ spring:
   profiles:
     active: ${APP_PROFILE:test}
   jpa:
-    open-in-view=true:
+    open-in-view: true
