@@ -4,7 +4,48 @@
 
 ---
 
+### IDE
+
+---
+
+[Intellij](https://www.jetbrains.com/pt-br/idea/download/)
+
+#### Plugins:
+
+Instalados:
+
+- [GitToolBox](https://plugins.jetbrains.com/plugin/7499-gittoolbox)
+- [SonarLint](https://plugins.jetbrains.com/plugin/7973-sonarlint)
+- [Docker](https://plugins.jetbrains.com/plugin/7724-docker)
+- [JPA Buddy](https://plugins.jetbrains.com/plugin/15075-jpa-buddy)
+- [Rainbow Brackets Lite](https://plugins.jetbrains.com/plugin/20710-rainbow-brackets-lite)
+- [Go To Implementation](https://plugins.jetbrains.com/plugin/15359-go-to-implementation)
+- [MapStruct Support](https://plugins.jetbrains.com/plugin/10036-mapstruct-support)
+- [POJO to JSON](https://plugins.jetbrains.com/plugin/12066-pojo-to-json)
+- [Json2Pojo](https://plugins.jetbrains.com/plugin/8533-json2pojo)
+- [.ignore](https://plugins.jetbrains.com/plugin/7495--ignore)
+
+Nativos:
+- [Settings Sync](https://plugins.jetbrains.com/plugin/20868-settings-sync)
+- [Lombok](https://plugins.jetbrains.com/plugin/6317-lombok)
+- [GitHub](https://plugins.jetbrains.com/plugin/13115-github)
+- [Git](https://plugins.jetbrains.com/plugin/13173-git)
+- [EditorConfig](https://plugins.jetbrains.com/plugin/7294-editorconfig)
+- [Markdown](https://plugins.jetbrains.com/plugin/7793-markdown)
+- [YAML](https://plugins.jetbrains.com/plugin/13126-yaml)
+
+
+#### StyleGuide
+
+https://google.github.io/styleguide/javaguide.html
+
+Configuração para aplicar de StyleGuide automaticamente:
+[google-java-format](https://github.com/google/google-java-format)
+
+
 ### Pre-requisitos:
+
+---
 
  - Docker instalado.
 ```sh
