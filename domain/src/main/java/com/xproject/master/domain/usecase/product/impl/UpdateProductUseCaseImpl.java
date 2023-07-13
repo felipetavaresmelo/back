@@ -2,7 +2,7 @@ package com.xproject.master.domain.usecase.product.impl;
 
 import com.xproject.master.domain.dataprovider.ProductDataProvider;
 import com.xproject.master.domain.entity.product.Product;
-import com.xproject.master.domain.usecase.product.FindProductByIdUseCase;
+import com.xproject.master.domain.usecase.product.ReadProductByIdUseCase;
 import com.xproject.master.domain.usecase.product.UpdateProductUseCase;
 
 import javax.inject.Inject;
@@ -17,14 +17,14 @@ public class UpdateProductUseCaseImpl implements UpdateProductUseCase {
     private ProductDataProvider productDataProvider;
 
     @Inject
-    private FindProductByIdUseCase findProductByIdUseCase;
+    private ReadProductByIdUseCase readProductByIdUseCase;
 
     @Override
     public Product execute(Long id, Product product) {
         if(Objects.isNull(product.getId()) || (!id.equals(product.getId()))){
             throw new NoSuchElementException("Invalid Id.");
         }
-        final Product productFound = findProductByIdUseCase.execute(id);
+        final Product productFound = readProductByIdUseCase.execute(id);
         if(Objects.nonNull(productFound) && Objects.nonNull(productFound.getId())){
             return productDataProvider.saveProduct(product);
         }else{

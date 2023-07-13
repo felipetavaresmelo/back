@@ -18,18 +18,18 @@ public class ProductDataProviderImpl implements ProductDataProvider {
     private ProductJpaRepository repository;
 
     @Override
-    public Product findProductById(Long id) {
+    public Product readProductById(Long id) {
         final ProductPo productPoById = repository.findById(id).orElse(new ProductPo());
         return ProductMapper.INSTANCE.productPoToProduct(productPoById);
     }
 
-    public List<Product> findProductListByIdList (List<Long> idList) {
+    public List<Product> readProductListByIdList(List<Long> idList) {
         final List<ProductPo> productPoListById = repository.findAllById(idList);
         return ProductMapper.INSTANCE.productPoListToProductList(productPoListById);
     }
 
     @Override
-    public List<Product> findProductList() {
+    public List<Product> readProductList() {
         final List<ProductPo> productPoList = repository.findAll();
         if(productPoList.isEmpty()){
             return new ArrayList<>();

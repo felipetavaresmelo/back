@@ -18,8 +18,8 @@ import java.util.Objects;
 @AllArgsConstructor
 public class ProductRestController implements ProductController {
 
-    private FindProductAllUseCase findProductAllUseCase;
-    private FindProductByIdUseCase findClientByIdUseCase;
+    private ReadProductAllUseCase readProductAllUseCase;
+    private ReadProductByIdUseCase findClientByIdUseCase;
     private CreateProductUseCase createProductUseCase;
     private CreateProductListUseCase createProductListUseCase;
     private DeleteProductByIdUseCase deleteProductByIdUseCase;
@@ -38,7 +38,7 @@ public class ProductRestController implements ProductController {
 
     @GetMapping(value = "all", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ProductDto>> findProductAll() {
-        final List<Product> productList = findProductAllUseCase.execute();
+        final List<Product> productList = readProductAllUseCase.execute();
         final List<ProductDto> productDtoList = ProductMapper.INSTANCE.productListToProductDtoList(productList);
         return ResponseEntity.ok().body(productDtoList);
     }

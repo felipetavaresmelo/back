@@ -22,7 +22,7 @@ public class DeleteProductListUseCaseImpl implements DeleteProductListUseCase {
         if(!productList.isEmpty()) {
             final List<Long> idList = productList.stream().map(Product::getId).collect(Collectors.toList());
             if (!idList.isEmpty()) {
-                final List<Product> productListByIdList = productDataProvider.findProductListByIdList(idList);
+                final List<Product> productListByIdList = productDataProvider.readProductListByIdList(idList);
                 productDataProvider.removeProductList(productListByIdList);
             }
         }

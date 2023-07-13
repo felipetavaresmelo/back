@@ -5,11 +5,11 @@ import com.xproject.master.domain.entity.product.Product;
 import java.util.List;
 
 public interface ProductDataProvider {
-    Product findProductById(Long id);
+    Product readProductById(Long id);
 
-    List<Product> findProductList();
+    List<Product> readProductList();
 
-    List<Product> findProductListByIdList (List<Long> idList);
+    List<Product> readProductListByIdList(List<Long> idList);
 
     Product saveProduct (Product client);
 
