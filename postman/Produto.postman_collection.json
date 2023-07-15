@@ -1,0 +1,41 @@
+{
+	"info": {
+		"_postman_id": "df023aad-211f-4a74-bab4-9c05d7145c1a",
+		"name": "Produto",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "625566"
+	},
+	"item": [
+		{
+			"name": "Detalhes do Produto",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "APP_USR-5015416049573419-061318-42c81e15e913feac23627bd3c5e447b9-35848126",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.mercadolibre.com/items/MLB1741502769",
+					"protocol": "https",
+					"host": [
+						"api",
+						"mercadolibre",
+						"com"
+					],
+					"path": [
+						"items",
+						"MLB1741502769"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

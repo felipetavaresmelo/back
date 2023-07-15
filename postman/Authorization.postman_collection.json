@@ -1,0 +1,120 @@
+{
+	"info": {
+		"_postman_id": "0cf4b56f-5596-4e63-8c2f-a11f500bd765",
+		"name": "Authorization",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "625566"
+	},
+	"item": [
+		{
+			"name": "Gerar CODE no browser",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://auth.mercadolivre.com.br/authorization?response_type=code&client_id=5015416049573419&redirect_uri=http://localhost:3000&state=$00001",
+					"protocol": "https",
+					"host": [
+						"auth",
+						"mercadolivre",
+						"com",
+						"br"
+					],
+					"path": [
+						"authorization"
+					],
+					"query": [
+						{
+							"key": "response_type",
+							"value": "code"
+						},
+						{
+							"key": "client_id",
+							"value": "5015416049573419"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "http://localhost:3000"
+						},
+						{
+							"key": "state",
+							"value": "$00001",
+							"description": "deve ser atualizado aleatóriamente a cada geração de CODE"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Trocar code por token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "content-type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "5015416049573419",
+							"description": "ID do aplicativo",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "NIFeVoGlLqVCrCezS0rcv1Xe6OWKTn5a",
+							"description": "Chave secreta do app",
+							"type": "text"
+						},
+						{
+							"key": "code",
+							"value": "TG-6488e7a4becfdb00018b354f-35848126",
+							"description": "Código gerado na consulta no browser",
+							"type": "text"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "http://localhost:3000",
+							"type": "text"
+						},
+						{
+							"key": "code_verifier",
+							"value": "00001",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://api.mercadolibre.com/oauth/token",
+					"protocol": "https",
+					"host": [
+						"api",
+						"mercadolibre",
+						"com"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

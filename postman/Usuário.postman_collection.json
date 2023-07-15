@@ -1,0 +1,46 @@
+{
+	"info": {
+		"_postman_id": "499151b5-79f5-4f03-926a-a106dd544613",
+		"name": "Usuário",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "625566"
+	},
+	"item": [
+		{
+			"name": "Criação de usuário teste",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"site_id\": \"MLB\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.mercadolibre.com/users/test_user?access_token=xpto",
+					"protocol": "https",
+					"host": [
+						"api",
+						"mercadolibre",
+						"com"
+					],
+					"path": [
+						"users",
+						"test_user"
+					],
+					"query": [
+						{
+							"key": "access_token",
+							"value": "xpto"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
