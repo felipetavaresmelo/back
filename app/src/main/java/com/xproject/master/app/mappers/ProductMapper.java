@@ -1,6 +1,5 @@
 package com.xproject.master.app.mappers;
 
-import com.xproject.master.app.dataprovider.mercadolivre.dto.ProductItemDto;
 import com.xproject.master.app.dataprovider.repository.jpa.po.ProductPo;
 import com.xproject.master.app.dto.ProductDto;
 import com.xproject.master.domain.entity.product.Product;
@@ -16,8 +15,6 @@ import java.util.List;
 public interface ProductMapper {
 
     ProductMapper INSTANCE = Mappers.getMapper(ProductMapper.class);
-
-    Product productItemDtoToProduct (ProductItemDto productItemDto);
 
     ProductDto productToProductDto (Product product);
 

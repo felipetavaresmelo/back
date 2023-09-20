@@ -1,23 +1,27 @@
 package com.xproject.master.app.dataprovider.mercadolivre;
 
-import com.xproject.master.app.dataprovider.mercadolivre.client.MercadoLivreClient;
-import com.xproject.master.app.dataprovider.mercadolivre.dto.ProductItemDto;
-import com.xproject.master.app.mappers.ProductMapper;
-import com.xproject.master.domain.dataprovider.MercadoLivreDataProvider;
-import com.xproject.master.domain.entity.product.Product;
+import com.xproject.master.app.dataprovider.mercadolivre.client.MercadoLivreAuthClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.SecureRandom;
+
 @Service
-public class MercadoLivreDataProviderImpl implements MercadoLivreDataProvider {
+public class MercadoLivreDataProviderImpl {
 
     @Autowired
-    private MercadoLivreClient mercadoLivreClient;
+    private MercadoLivreAuthClient mercadoLivreAuthClient;
 
-    @Override
-    public Product getProductItem(String item){
-        ProductItemDto productItemDto = mercadoLivreClient.getProductItem(item);
+    public MercadoLivreDataProviderImpl(MercadoLivreAuthClient mercadoLivreAuthClient) {
+        this.mercadoLivreAuthClient = mercadoLivreAuthClient;
+    }
 
-        return ProductMapper.INSTANCE.productItemDtoToProduct(productItemDto);
+    public void codeGenerator(String clientId, String redirectUri) {
+
+        int randomInt = new SecureRandom().nextInt();
+        randomInt = randomInt < 0 ? (randomInt * -1) : randomInt;
+        String state = String.valueOf(randomInt);
+
+        mercadoLivreAuthClient.codeGenerator("code", clientId, redirectUri, state);
     }
 }

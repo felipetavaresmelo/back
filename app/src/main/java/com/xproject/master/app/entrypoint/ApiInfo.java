@@ -6,7 +6,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
 
 @OpenAPIDefinition(info =
 @Info(title = "X-Project"
-        , description = "This project was made using Clean Archiquecture."
+        , description = "This project was made using Clean Architecture."
         , version = "0.0.1"),
         servers = {
                 @Server(url = "http://localhost:8080/", description = "Enviromment Local"),
