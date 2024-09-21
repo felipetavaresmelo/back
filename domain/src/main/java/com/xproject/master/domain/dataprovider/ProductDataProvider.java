@@ -11,7 +11,7 @@ public interface ProductDataProvider {
 
     List<Product> findProductListByIdList (List<Long> idList);
 
-    Product saveProduct (Product client);
+    Product saveProduct (Product product);
 
     List<Product> saveProductList(List<Product> productList);
 
